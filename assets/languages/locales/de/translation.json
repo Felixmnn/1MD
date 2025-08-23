@@ -1,0 +1,502 @@
+{
+  "login": {
+    "setPasswordTitle": "Neues Passwort festlegen",
+    "enterPasswordTitle": "Passwort eingeben",
+    "passwordPlaceholder": "Passwort",
+    "savePassword": "Passwort speichern",
+    "login": "Anmelden",
+    "biometricPrompt": "Mit Fingerabdruck oder Gesicht anmelden",
+    "biometricFallback": "Passwort verwenden",
+    "toastPasswordSavedTitle": "Passwort gespeichert",
+    "toastPasswordSavedMessage": "Dein Passwort wurde erfolgreich gesetzt.",
+    "toastWrongPasswordTitle": "Falsches Passwort",
+    "toastWrongPasswordMessage": "Das eingegebene Passwort ist falsch.",
+    "acceptAGB": "AGB akzeptieren",
+  "viewAGB": "AGB anzeigen",
+    "AGB": [
+    "AGB – Mein Tagebuch",
+    "Nutzung: Die App ist ausschließlich für private Tagebuchaufzeichnungen bestimmt. Kommerzielle Nutzung ist nicht gestattet.",
+    "Daten: Alle Inhalte werden lokal auf deinem Gerät gespeichert. ...",
+    "Haftung: Der Entwickler haftet nicht für Datenverlust, Schäden oder sonstige Nachteile, außer im Fall von grober Fahrlässigkeit oder Vorsatz.",
+    "Änderungen: Funktionen der App können jederzeit angepasst oder entfernt. Mögliche Auswirkungen auf deine Daten werden nach bestem Wissen kommuniziert.",
+    "Rechte: Alle Rechte an der App verbleiben beim Entwickler. Deine Tagebuchinhalte gehören dir und können exportiert oder gesichert werden. Kopieren oder Weitergeben der App selbst ist nicht erlaubt.",
+    "Beendigung: Durch Löschen der App werden alle lokal gespeicherten Daten entfernt. Sorge selbst für Backups, wenn du Inhalte behalten möchtest.",
+    "Kontakt & Impressum: Bei Fragen oder rechtlichen Anliegen schreibe an: contact.oneminutediary@gmail.com"
+  ]
+  },"profile": {
+    "language":{
+      "sectionTitle": "Sprache"
+    },
+    "csv": {
+      "sectionTitle": "Datenverarbeitung",
+      "export": "CSV-Export",
+      "import": "CSV-Import",
+      "successMessage": "Die Datei wurde erfolgreich verarbeitet.",
+      "errorMessageExport": "Beim CSV-Export ist ein Fehler aufgetreten.",
+      "errorMessageImport": "Beim CSV-Import ist ein Fehler aufgetreten.",
+      "canceledTitleExport": "CSV-Export abgebrochen",
+      "canceledTitleImport": "CSV-Import abgebrochen",
+      "canceledMessage": "Der Vorgang wurde vom Nutzer abgebrochen.",
+      "deleteAllButton": "Alle Daten löschen",
+      "deleteWarning": "Das kann nicht rückgängig gemacht werden!",
+      "toastWarningTitle": "Achtung",
+      "toastWarningMessage": "Dies ist ireversibel!",
+      "deleteSuccessTitle": "Daten gelöscht",
+      "deleteSuccessMessage": "Alle Einträge wurden erfolgreich entfernt.",
+      "deleteErrorTitle": "Löschfehler",
+      "deleteErrorMessage": "Beim Löschen der Einträge ist ein Fehler aufgetreten.",
+      "cancelButton": "Abbrechen"
+    },
+    "password": {
+      "sectionTitle": "Passwortverwaltung",
+      "changeButton": "Passwort ändern",
+      "successTitle": "Passwort geändert",
+      "successMessage": "Dein Passwort wurde erfolgreich geändert.",
+      "errorTitle": "Fehler"
+    },
+    "agb": {
+      "sectionTitle": "Allgemeine Geschäftsbedingungen (AGB)",
+      "lines": [
+        "AGB – Mein Tagebuch",
+        "Nutzung: Die App ist ausschließlich für private Tagebuchaufzeichnungen bestimmt. Kommerzielle Nutzung ist nicht gestattet.",
+        "Daten: Alle Inhalte werden lokal auf deinem Gerät gespeichert. Die Sicherheit deiner Daten hängt von deinem Gerät ab. Wir empfehlen regelmäßige Backups. Inhalte werden nicht auf Servern oder in der Cloud gespeichert.",
+        "Haftung: Der Entwickler haftet nicht für Datenverlust, Schäden oder sonstige Nachteile, außer im Fall von grober Fahrlässigkeit oder Vorsatz.",
+        "Änderungen: Funktionen der App können jederzeit angepasst oder entfernt werden. Mögliche Auswirkungen auf deine Daten werden nach bestem Wissen kommuniziert.",
+        "Rechte: Alle Rechte an der App verbleiben beim Entwickler. Deine Tagebuchinhalte gehören dir und können exportiert oder gesichert werden. Kopieren oder Weitergeben der App selbst ist nicht erlaubt.",
+        "Beendigung: Durch Löschen der App werden alle lokal gespeicherten Daten entfernt. Sorge selbst für Backups, wenn du Inhalte behalten möchtest.",
+        "Kontakt & Impressum: Bei Fragen oder rechtlichen Anliegen schreibe an: contact.oneminutediary@gmail.com"
+      ]
+    }
+  },"data": {
+    "filterPlaceholder": "Nach Tag filtern",
+    "noEntriesTitle": "Keine Einträge gefunden",
+    "noEntriesMessage": "Wähle einen anderen Tag aus oder füge Einträge hinzu.",
+    "bottomSheet": {
+      "complete": " Vollständig"
+    },
+    "buttons": {
+      "saveData": "Daten speichern",
+      "updateData": "Daten aktualisieren"
+    },
+    "toast": {
+      "successTitle": "Erfolg",
+      "successMessage": "Eintrag erfolgreich gespeichert!",
+      "errorTitle": "Fehler",
+      "errorMessage": "Speichern des Eintrags fehlgeschlagen."
+    }
+  },"home": {
+    "dateCompleated": " Vollständig",
+    "saveData": "Daten speichern",
+    "updateData": "Daten aktualisieren",
+    "missingData": "Fehlende Daten",
+    "toast": {
+      "successTitle": "Daten gespeichert",
+      "successMessage": "Deine Daten wurden erfolgreich gespeichert.",
+      "errorTitle": "Fehler",
+      "errorMessage": "Beim Speichern der Daten ist ein Fehler aufgetreten."
+    },
+    "profileButton": "Profil"
+  },"boolEnumNumber": {
+    "overview": "Überblick",
+    "overviewDescription": "Ermittelt wird, ob {{labelA}} mit {{labelB}} zusammenhängt.",
+    
+    "results": "Ergebnisse",
+    "resultsBooleanAvgTrue": "Ø bei {{labelA}}=Ja: {{avgTrue}}",
+    "resultsBooleanAvgFalse": "Ø bei {{labelA}}=Nein: {{avgFalse}}",
+    "resultsBooleanDiff": "Differenz: {{diff}}",
+    "resultsMax": "Max: {{maxValue}}",
+    "resultsMin": "Min: {{minValue}}",
+    
+    "resultsEnum": "Ergebnisse pro Ausprägung",
+    "resultsEnumCategory": "{{label}}: Ø {{avg}} ({{count}} Werte)",
+    "resultsEnumCorrelation": "Korrelation: {{correlation}}",
+
+    "hypothesis": "💡 Hypothese",
+    "hypothesisBooleanIncrease": "Das Zutreffen von {{labelA}} führt mit hoher Wahrscheinlichkeit zu einer Steigerung von {{labelB}}.",
+    "hypothesisBooleanDecrease": "Das Zutreffen von {{labelA}} führt mit hoher Wahrscheinlichkeit zu einer Verringerung von {{labelB}}.",
+    "hypothesisBooleanUnclear": "Ein Einfluss von {{labelA}} auf {{labelB}} ist möglich, aber die Wahrscheinlichkeit ist gering.",
+    
+    "hypothesisEnumHigh": "Höhere Ausprägungen von {{labelA}} stehen mit hoher Wahrscheinlichkeit im Zusammenhang mit höheren {{labelB}}-Werten.",
+    "hypothesisEnumLow": "Höhere Ausprägungen von {{labelA}} stehen mit hoher Wahrscheinlichkeit im Zusammenhang mit niedrigeren {{labelB}}-Werten.",
+    "hypothesisEnumUnclear": "Ein Zusammenhang zwischen {{labelA}} und {{labelB}} ist möglich, aber nicht klar erkennbar.",
+    
+    "errorInvalidData": "Noch keine Daten vorhanden"
+  },"enumEnum": {
+  "variableALabel": "Variable A",
+  "variableBLabel": "Variable B",
+  "enumLabels": {
+    "variableA": ["Sehr niedrig", "Niedrig", "Mittel", "Hoch", "Sehr hoch"],
+    "variableB": ["Sehr niedrig", "Niedrig", "Mittel", "Hoch", "Sehr hoch"]
+  },
+  "true": "Wahr",
+  "false": "Falsch",
+  "selectedTitle": "Ausgewählter Wert",
+  "selectedDescription": "{{labelA}} = {{valueA}}, {{labelB}} = {{valueB}} (Anzahl: {{count}}, Anteil: {{percent}}%)",
+  "selectedNone": "Keine Auswahl getroffen.",
+  "errorInvalidData": "Ungültige Daten – bitte Eingaben überprüfen.",
+
+  "correlationNone": "keine Korrelation",
+  "correlationWeak": "eine schwache Korrelation",
+  "correlationModerate": "eine mittlere Korrelation",
+  "correlationStrong": "eine starke Korrelation",
+  "correlationVeryStrong": "eine sehr starke Korrelation",
+  "increase": "Erhöhung",
+  "decrease": "Verringerung",
+
+  "positive": "positiv",
+  "negative": "negativ",
+
+  "noRelationShip": "Es besteht keine klare Beziehung zwischen {{labelA}} und {{labelB}}.",
+  "relationship": "Es besteht eine {{strength}} {{effect}}e Beziehung zwischen {{labelA}} und {{labelB}}.",
+  "addMoreData": "Fügen Sie mehr Daten hinzu, um eine belastbare Aussage zu treffen.",
+
+  "mayBeWeakCorrelation": " Es besteht eine geringe Wahrscheinlichkeit, dass eine {{inDe}} von {{labelA}} mit einer {{dirB}} von {{labelB}} verbunden ist.",
+  "mayBeWeakCorrelationRecommendation": "Sammeln Sie mehr Daten, bevor Sie Entscheidungen auf Grundlage der schwachen Beziehung zwischen {{labelA}} und {{labelB}} treffen.",
+
+  "moderateCorrelation": " Eine {{inDe}} von {{labelA}} geht tendenziell mit einer {{dirB}} von {{labelB}} einher.",
+  "moderateCorrelationRecommendation": "Erhöhen Sie {{labelA}}, um eine moderate {{dirB}} von {{labelB}} zu erreichen.",
+
+  "strongCorrelation": " Eine {{inDe}} von {{labelA}} ist stark mit einer {{dirB}} von {{labelB}} verbunden.",
+  "strongCorrelationRecommendation": "Passen Sie {{labelA}} an, um {{labelB}} stark zu beeinflussen.",
+
+  "veryStrongCorrelation": " Eine {{inDe}} von {{labelA}} ist sehr stark mit einer {{dirB}} von {{labelB}} verbunden.",
+  "veryStrongCorrelationRecommendation": "Priorisieren Sie Änderungen an {{labelA}}, um zuverlässig eine deutliche {{dirB}} von {{labelB}} zu erreichen.",
+
+  "noRelationShipBool": "Es besteht keine klare Beziehung zwischen {{labelEnum}} und dem Eintreten von {{labelBool}}.",
+
+  "mayBeWeakCorrelationBool": " Ein höheres {{labelEnum}} steht schwach mit einer {{dirProb}} der Wahrscheinlichkeit von {{labelBool}} in Verbindung.",
+  "mayBeWeakCorrelationRecommendationBool": "Sammeln Sie mehr Daten, bevor Sie Entscheidungen auf Grundlage dieser schwachen Beziehung treffen.",
+
+  "moderateCorrelationBool": " Eine {{inDe}} von {{labelEnum}} steht in mittlerem Zusammenhang mit einer {{dirProb}} der Wahrscheinlichkeit von {{labelBool}}.",
+  "moderateCorrelationRecommendationBool": "Erhöhen Sie {{labelEnum}}, um eine moderate {{dirProb}} der Wahrscheinlichkeit von {{labelBool}} zu erreichen.",
+
+  "strongCorrelationBool": " Eine {{inDe}} von {{labelEnum}} steht in starkem Zusammenhang mit einer {{dirProb}} der Wahrscheinlichkeit von {{labelBool}}.",
+  "strongCorrelationRecommendationBool": "Passen Sie {{labelEnum}} an, um die Wahrscheinlichkeit von {{labelBool}} stark zu beeinflussen.",
+
+  "veryStrongCorrelationBool": " Eine {{inDe}} von {{labelEnum}} steht in sehr starkem Zusammenhang mit einer {{dirProb}} der Wahrscheinlichkeit von {{labelBool}}.",
+  "veryStrongCorrelationRecommendationBool": "Priorisieren Sie Änderungen an {{labelEnum}}, um zuverlässig eine deutliche {{dirProb}} der Wahrscheinlichkeit von {{labelBool}} zu erreichen.",
+
+  "notEnoughData": "Fügen Sie mehr Daten hinzu, um eine belastbare Aussage zu treffen.",
+  "relationshipBool": "Die Beziehung zwischen {{labelEnum}} und {{labelBool}} ist {{strength}}.",
+
+  "effectVeryStrong": "sehr stark",
+  "effectStrong": "stark",
+  "effectModerate": "mittel",
+  "effectWeak": "schwach",
+  "effectNone": "vernachlässigbar",
+
+  "outliersWarning": "\n⚠️ Achtung: Die Daten enthalten Ausreißer – Ergebnisse sollten mit Vorsicht interpretiert werden.",
+
+  "hypothesisTitle": "💡 Hypothese",
+  "recommendationTitle": "⚡ Empfehlung"
+},"numberNumber": {
+    "errorInvalidData": "❌ Ungültige oder leere Daten",
+    "overviewTitle": "Überblick",
+    "correlationNone": "Keine erkennbare Beziehung.",
+    "correlationWeak": "Schwacher Zusammenhang.",
+    "correlationModerate": "Moderater Zusammenhang.",
+    "correlationStrong": "Starker Zusammenhang.",
+    "correlationVeryStrong": "Sehr starker Zusammenhang.",
+    "resultsTitle": "Ergebnisse",
+    "avgA": "Durchschnitt {{labelA}}: {{avg}} (Median: {{median}}, Min: {{min}}, Max: {{max}})",
+    "avgB": "Durchschnitt {{labelB}}: {{avg}} (Median: {{median}}, Min: {{min}}, Max: {{max}})",
+    "measurementsCount": "Betrachtete Messungen: {{count}}",
+    "outliersFound": "Es gibt {{count}} auffällige Ausreißer.",
+    "noOutliers": "Keine auffälligen Ausreißer gefunden.",
+    "trendPositive": "{{labelA}} steigt tendenziell, wenn {{labelB}} zunimmt.",
+    "trendNegative": "{{labelA}} sinkt tendenziell, wenn {{labelB}} zunimmt.",
+    "noTrend": "Keine durchschnittliche Steigung erkennbar.",
+    "hypothesisTitle": "💡 Hypothese",
+    "hypothesisNone": "Kein eindeutiger Zusammenhang erkennbar.",
+    "hypothesisPositive": "{{labelA}} und {{labelB}} könnten gemeinsam durch ähnliche Faktoren beeinflusst werden.",
+    "hypothesisNegative": "Ein Anstieg von {{labelA}} geht oft mit einem Rückgang von {{labelB}} einher."
+  },"progressOverTime": {
+    "buttonTitle": "🔄 {{name}}",
+    "variableLabel": "📌 Variable: ",
+    "categoryLabel": "🧭 Kategorie: ",
+    "averageLabel": "📊 Durchschnitt: ",
+    "minMaxLabel": "📉 Min - Max: ",
+    "changeTimeframe": "📅 Zeitfenster ändern",
+    "noValue": "--",
+    "noMin": "xx",
+    "noMax": "xx",
+    "countLabel": "📊 Anzahl der Einträge: "
+  },"customBarChart": {
+    "title": "Balkendiagramm",
+    "noData": "Keine Daten verfügbar",
+    "months": {
+      "jan": "Jan",
+      "feb": "Feb",
+      "mar": "Mär",
+      "apr": "Apr",
+      "may": "Mai",
+      "jun": "Jun",
+      "jul": "Jul",
+      "aug": "Aug",
+      "sep": "Sep",
+      "oct": "Okt",
+      "nov": "Nov",
+      "dec": "Dez"
+    }
+  },"booleanBooleanChart": {
+    "title": "Boolean vs Boolean Chart",
+    "noData": "Keine Daten verfügbar",
+    "errorArrays": "Fehler: Arrays müssen gleich lang sein.",
+    "yes": "Ja",
+    "no": "Nein",
+    "xAxis": "x-Achse",
+    "yAxis": "y-Achse",
+    "variableA": "Variable A",
+    "variableB": "Variable B"
+  },"enumBarChart": {
+    "title": "Enum Balkendiagramm",
+    "noData": "Keine Daten verfügbar",
+    "axisX": "x-Achse",
+    "axisY": "y-Achse",
+    "bool": {
+      "yes": "Ja",
+      "no": "Nein"
+    },
+    "enum": {
+      "0": "Sehr gering",
+      "1": "Gering",
+      "2": "Mittel",
+      "3": "Hoch",
+      "4": "Sehr hoch"
+    },
+    "average": "Ø"
+  }, "enumEnumChart": {
+    "errorArraysNotSameLength": "Fehler: Arrays müssen gleich lang sein.",
+    "axisLabels": "x-Achse: {{nameA}}, y-Achse: {{nameB}}"
+  },"heatmap": {
+    "title": "Beispiel Heatmap",
+    "weekDays": ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"],
+    "today": "Heute"
+  },"scatterPlot": {
+    "xLabelDefault": "X-Achse",
+    "yLabelDefault": "Y-Achse",
+    "minDataError": "Für dieses Diagramm sind mindestens zwei Einträge erforderlich.",
+    "xAxis": "X",
+    "yAxis": "Y"
+  },"csvExport": {
+    "shareDialogTitle": "CSV exportieren oder teilen",
+    "alertTitleUnavailable": "Nicht verfügbar",
+    "alertMessageUnavailable": "Dateifreigabe ist auf diesem Gerät nicht möglich.",
+    "exportButton": "Daten exportieren"
+  },"csvImport": {
+    "importButton": "Daten Importieren",
+    "alertImportErrorTitle": "Fehler beim Importieren",
+    "alertImportErrorMessage": "Ein unerwarteter Fehler ist aufgetreten.",
+    "alertCancelled": "Datei-Auswahl abgebrochen"
+  },"resetPasswordModal": {
+    "steps": {
+      "authTitle": "Authentifizierung erforderlich",
+      "resetTitle": "Neues Passwort setzen"
+    },
+    "placeholders": {
+      "oldPassword": "Altes Passwort",
+      "newPassword": "Neues Passwort"
+    },
+    "buttons": {
+      "passwordConfirm": "Mit Passwort bestätigen",
+      "biometricConfirm": "Mit Biometrie bestätigen",
+      "resetPassword": "Passwort ändern",
+      "cancel": "Abbrechen",
+        "resetConfirm": "Passwort zurücksetzen"
+    },
+    "toast": {
+      "biometryNotAvailable": {
+        "title": "Biometrie nicht verfügbar",
+        "message": "Dein Gerät unterstützt keine biometrische Authentifizierung."
+      },
+      "biometryFailed": {
+        "title": "Biometrische Authentifizierung fehlgeschlagen",
+        "message": "Bitte versuche es erneut oder nutze die Passwort-Authentifizierung."
+      },
+      "functionNotImplemented": {
+        "title": "Funktion nicht implementiert",
+        "message": "Die Überprüfung des alten Passworts ist nicht implementiert."
+      },
+      "wrongPassword": {
+        "title": "Falsches Passwort",
+        "message": "Das eingegebene Passwort ist falsch."
+      },
+      "invalidPassword": {
+        "title": "Ungültiges Passwort",
+        "message": "Das Passwort muss mindestens 6 Zeichen lang sein."
+      }
+    },
+    "alerts": {
+      "errorTitle": "Fehler"
+    }
+  },"notifications": {
+    "dailyReminder": {
+      "title": "Dein tägliches Tagebuch 📔",
+      "body": "Vergiss nicht, deinen heutigen Eintrag zu machen!"
+    },
+    "permissionDenied": "Benachrichtigungs-Berechtigung nicht erteilt.",
+    "scheduled": "Tägliche Erinnerung um 18:00 Uhr geplant ✅"
+  },"dropdown": {
+    "workout": "Workout",
+    "avoidedBadHabits": "Schlechte Gewohnheiten vermeiden",
+    "productivity": "Produktivität",
+    "sleepQuality": "Schlafqualität",
+    "workoutIntensity": "Workout Intensität",
+    "overallDayRating": "Tagesbewertung",
+    "workHours": "Arbeitsstunden",
+    "sleepDuration": "Schlafdauer",
+    "kcal": "Kalorien",
+    "steps": "Schritte",
+    "workoutDuration": "Workout Dauer",
+    "socialInteractions": "Soziale Interaktionen",
+    "goodSocialInteractions": "Gute Soziale Interaktionen",
+    "badSocialInteractions": "Schlechte Soziale Interaktionen",
+    "socialMediaUsageMorning": "Social Media Nutzung Morgen",
+    "socialMediaUsageEvening": "Social Media Nutzung Abend",
+    "thingsLearned": "Gelerntes",
+    "somethingSpecial": "Etwas Besonderes"
+    
+  },"displayAndEditData": {
+  "sections": {
+    "work": "Arbeit",
+    "physicalHealth": "Körperliche Gesundheit",
+    "mentalHealth": "Mentale Gesundheit",
+    "overallDayRating": "Gesamtbewertung des Tages"
+  },
+  "fields": {
+    "workHours": {
+      "label": "Arbeitsstunden",
+      "placeholder": "Stunden eingeben"
+    },
+    "productivity": {
+      "label": "Produktivität",
+      "options": ["Niedrig", "Mittel", "Hoch"]
+    },
+    "thingsLearned": {
+      "label": "Gelerntes",
+      "placeholder": "Gelerntes eingeben"
+    },
+    "sleepDuration": {
+      "label": "Schlafdauer (h)",
+      "placeholder": "Stunden eingeben"
+    },
+    "sleepQuality": {
+      "label": "Schlafqualität",
+      "options": ["Schlecht", "Durchschnittlich", "Gut"]
+    },
+    "kcal": {
+      "label": "Kalorien",
+      "placeholder": "Kalorien"
+    },
+    "steps": {
+      "label": "Schritte",
+      "placeholder": "Schritte"
+    },
+    "workout": {
+      "label": "Training"
+    },
+    "workoutDuration": {
+      "label": "Trainingsdauer (min)",
+      "placeholder": "Minuten eingeben"
+    },
+    "workoutIntensity": {
+      "label": "Trainingsintensität",
+      "options": ["Niedrig", "Mittel", "Hoch"]
+    },
+    "socialInteractions": {
+      "label": "Soziale Interaktionen",
+      "placeholder": "Anzahl eingeben"
+    },
+    "goodSocialInteractions": {
+      "label": "Positive",
+      "placeholder": "Anzahl eingeben"
+    },
+    "badSocialInteractions": {
+      "label": "Negative",
+      "placeholder": "Anzahl eingeben"
+    },
+    "socialMediaUsageMorning": {
+      "label": "Soziale Medien am Morgen"
+    },
+    "socialMediaUsageEvening": {
+      "label": "Soziale Medien am Abend"
+    },
+    "avoidedBadHabits": {
+      "label": "Schlechte Gewohnheiten vermieden"
+    },
+    "somethingSpecial": {
+      "label": "Etwas Besonderes",
+      "placeholder": "Etwas Besonderes eingeben"
+    },
+    "overallDayRating": {
+      "label": "Gesamtbewertung des Tages"
+    }
+  }
+  },
+
+  "pages": {
+    "correlation": "Verlauf über Zeitraum",
+    "change": "Zusammenhänge entdecken"
+  },
+  "alerts": {
+    "noDataTitle": "Keine Daten gefunden",
+    "noDataMessage": "Für die Variable {{variable}} wurden keine Daten gefunden. Bitte wähle eine andere Variable."
+  },
+  "buttons": {
+    "variable1": "Variable 1",
+    "variable2": "Variable 2",
+    "createFirstEntry": "Erstelle einen ersten Eintrag."
+  },
+  "analysis": {
+    "selectTwoVariables": "Bitte wähle zwei Variablen aus, um eine Analyse durchzuführen.",
+    "almostThere": "Fast geschafft! Nur noch {{remaining}} Einträge bis zur ersten aussagekräftigen Analyse."
+  },
+  "categories": {
+    "physicalHealth": "Körperliche Gesundheit",
+    "mentalHealth": "Mentale Gesundheit",
+    "work": "Arbeit",
+    "overallDayRating": "Tagesbewertung"
+  },"boolNumber":{
+    "hypothesisStrongPositive": "Ein starker positiver Zusammenhang zwischen {{labelA}} und {{labelB}}. \n",
+    "hypothesisModeratePositive": "Ein moderater positiver Zusammenhang zwischen {{labelA}} und {{labelB}}. \n",
+    "hypothesisWeakPositive": "Ein schwacher positiver Zusammenhang zwischen {{labelA}} und {{labelB}}. \n",
+    "hypothesisStrongNegative": "Ein starker negativer Zusammenhang zwischen {{labelA}} und {{labelB}}. \n",
+    "hypothesisModerateNegative": "Ein moderater negativer Zusammenhang zwischen {{labelA}} und {{labelB}}. \n",
+    "hypothesisWeakNegative": "Ein schwacher negativer Zusammenhang zwischen {{labelA}} und {{labelB}}. \n",
+    "hypothesisNone": "Kein klarer Zusammenhang zwischen {{labelA}} und {{labelB}}. \n",
+    "noClearCorrelation" : "Es gibt derzeit keinen klaren linearen Zusammenhang zwischen {{labelA}} und {{labelB}}. Sammeln Sie mehr Daten, um eine verlässlichere Aussage treffen zu können.",
+    "trendPositive":"Eine Erhöhung von {{labelA}} führt direkt zu einer Erhöhung von {{labelB}}.",
+    "recommendationIncreas": "-> Empfehlung: Erhöhe deine {{labelA}}, um {{labelB}} zu steigern.",
+    "recommendationDecrease": "-> Empfehlung: Reduziere deine {{labelA}, um {{labelB}} zu steigern.",
+    "trendNegative":"Eine Erhöhung von {{labelA}} führt direkt zu einer Verringerung von {{labelB}}.",
+    "caution": "⚠️ Vorsicht: Die Daten enthalten Ausreißer – Ergebnisse sollten mit Vorsicht interpretiert werden.",
+    "selectedCase": "{{labelA}} = {{fieldA}}, {{labelB}} = {{fieldB}}\nAnzahl: {{anteilA}}, Anteil: {{anteilB}}%",
+    "selectedTitle": "✅ Ausgewählter Fall",
+    "hypothesisTitle": "💡 Hypothese",
+    "recommendationTitle": "⚡ Empfehlung",
+    "selectedNone": "Keine Auswahl getroffen."
+
+  },
+  "boolBool": {
+    "errorInvalidData": "Ungültige Daten: Die Arrays müssen die gleiche Länge haben.",
+    "selectedTitle": "✅ Ausgewähltes Feld",
+    "selectedDescription": "Der Fall, bei dem {{labelA}} {{fieldA}} ist und {{labelB}} {{fieldB}} ist, tritt in {{percent}}% der Fälle auf.",
+    "selectedNone": "Keine Auswahl.",
+    "true": "wahr",
+    "false": "falsch",
+    "hypothesisTitle": "💡 Hypothese",
+    "hypothesisNone": "Kein klarer Zusammenhang.",
+    "hypothesisStrongPositive": "Starker positiver Zusammenhang zwischen {{labelA}} und {{labelB}}.",
+    "hypothesisModeratePositive": "Moderater positiver Zusammenhang zwischen {{labelA}} und {{labelB}}.",
+    "hypothesisWeakPositive": "Schwacher positiver Zusammenhang zwischen {{labelA}} und {{labelB}}.",
+    "hypothesisStrongNegative": "Starker negativer Zusammenhang zwischen {{labelA}} und {{labelB}}.",
+    "hypothesisModerateNegative": "Moderater negativer Zusammenhang zwischen {{labelA}} und {{labelB}}.",
+    "hypothesisWeakNegative": "Schwacher negativer Zusammenhang zwischen {{labelA}} und {{labelB}}.",
+    "recommendationTitle": "⚡ Empfehlung",
+    "recommendationNone": "\n⚠️ Keine klare Empfehlung möglich.",
+    "recommendationIncrease": "Wenn du {{labelA}} machst, erhöht sich die Wahrscheinlichkeit von {{labelB}} um {{diffPercent}}%.",
+    "recommendationDecrease": "Wenn du {{labelA}} machst, sinkt die Wahrscheinlichkeit von {{labelB}} um {{diffPercent}}%."
+  }
+
+
+}
