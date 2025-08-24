@@ -378,36 +378,11 @@ const lastDate = lastDateString
     })()
   : new Date();
 
-function generateCorrelatedNumericArrays(length = 100) {
-  const arraySmall = [];
-  const arrayBig = [];
-
-  for (let i = 0; i < length; i++) {
-    // arraySmall zufällig 1–5000
-    const small = Math.floor(Math.random() * 5000) + 1;
-    arraySmall.push(small);
-
-    // arrayBig = lineare Transformation + Rauschen
-    const noise = Math.floor(Math.random() * 2000) - 1000; // ±1000
-    let large = Math.floor((small / 5000) * (10000 - 500) + 500 + noise);
-
-    // Begrenzung auf 500–10000
-    large = Math.max(500, Math.min(10000, large));
-    arrayBig.push(large);
-  }
-
-  return { arraySmall, arrayBig };
-}
-
-const { arraySmall, arrayBig } = generateCorrelatedNumericArrays();
 
 
 
   
 
-
-const arrA = [2, 5, 3, 3, 2, 2, 1, 5, 2, 4, 3, 3, 3, 2, 4, 3, 2, 3, 2, 1, 4, 1, 4, 5, 3, 1, 3, 5, 4, 4, 5, 1, 2, 5, 5, 2, 5, 3, 4, 4, 4, 2, 2, 2, 5, 4, 5, 2, 4, 5, 3, 3, 2, 2, 4, 2, 5, 3, 3, 2, 1, 1, 1, 1, 5, 1, 3, 4, 2, 2, 1, 2, 2, 2, 2, 2, 3, 5, 4, 4, 5, 3, 1, 3, 4, 1, 5, 3, 1, 5, 5, 3, 4, 1, 2, 3, 4, 5, 3, 3]
-const arrB =[3, 4, 3, 2, 2, 1, 2, 4, 3, 3, 4, 3, 2, 1, 3, 4, 3, 3, 3, 2, 3, 2, 5, 5, 3, 2, 3, 4, 5, 5, 5, 1, 2, 5, 4, 1, 5, 4, 4, 5, 3, 3, 3, 3, 5, 4, 4, 2, 5, 4, 3, 4, 2, 2, 5, 2, 5, 4, 3, 2, 1, 2, 2, 1, 4, 1, 4, 3, 1, 3, 1, 2, 3, 3, 1, 2, 2, 5, 5, 3, 4, 4, 1, 4, 4, 2, 5, 4, 1, 5, 5, 4, 5, 1, 3, 2, 4, 5, 3, 3]
   return (
       <SafeAreaView edges={['top']} className='h-full w-full bg-gray-900 items-center '>
         <Text className='text-white font-bold text-2xl mb-4'>{data[currentIndex].title}</Text>
@@ -487,12 +462,9 @@ const arrB =[3, 4, 3, 2, 2, 1, 2, 4, 3, 3, 4, 3, 2, 1, 3, 4, 3, 3, 3, 2, 3, 2, 5
                       variables.varDataA.length > 0 ?
                       returnMatchingPlotType(variables.varA,variables.varB) === "GroupedBarChart" ? (
                         <EnumEnumChart
-                         /*
                   variableB={variables.varA === "boolean" ?  variables.varDataA.map((i) => i.value +1) : variables.varDataA.map((i) => i.value +1)}
                   variableA={variables.varB === "boolean" ? variables.varDataB.map((i) => i.value +1) : variables.varDataB.map((i) => i.value +1)}
-                  */
-                  variableA={arrA}
-                  variableB={arrB}
+                 
 
                           labelA={ variables.varBName}
                           labelB={ variables.varAName}
@@ -515,12 +487,9 @@ const arrB =[3, 4, 3, 2, 2, 1, 2, 4, 3, 3, 4, 3, 2, 1, 3, 4, 3, 3, 3, 2, 3, 2, 5
                           />
                       ) : returnMatchingPlotType(variables.varA,variables.varB) === "ScatterPlot" ? (
                         <ScatterPlot
-                        /*
                           xData={variables.varDataA.map((i) => i.value)}
                           yData={variables.varDataB.map((i) => i.value)}
-                          */
-                          xData = {arrayBig}
-                          yData = {arraySmall}
+                          
                           xLabel={getEntryByLabel(variables.varAName)?.name}
                           yLabel={getEntryByLabel(variables.varBName)?.name}
                           
@@ -602,12 +571,9 @@ const arrB =[3, 4, 3, 2, 2, 1, 2, 4, 3, 3, 4, 3, 2, 1, 3, 4, 3, 3, 3, 2, 3, 2, 5
             </View>
             {
                 returnMatchingPlotType(variables.varA,variables.varB) === "GroupedBarChart" ? ( <EnumEnum 
-                   /*
                   variableB={variables.varA === "boolean" ?  variables.varDataA.map((i) => i.value +1) : variables.varDataA.map((i) => i.value +1)}
                   variableA={variables.varB === "boolean" ? variables.varDataB.map((i) => i.value +1) : variables.varDataB.map((i) => i.value +1)}
-                  */
-                  variableA={arrA}
-                  variableB={arrB}
+                  
                   labelA={ variables.varA === "boolean" ? getEntryByLabel(variables.varBName)?.name : getEntryByLabel(variables.varAName)?.name}
                   labelB={ variables.varB == "enum" && variables.varA == "boolean" ? getEntryByLabel(variables.varAName)?.name : getEntryByLabel(variables.varBName)?.name}
                   idA={ variables.varA === "boolean" ? variables.varBName : variables.varAName}
@@ -633,15 +599,10 @@ const arrB =[3, 4, 3, 2, 2, 1, 2, 4, 3, 3, 4, 3, 2, 1, 3, 4, 3, 3, 3, 2, 3, 2, 5
                               : [null, null, 0, 0]}
                           />
             ) : returnMatchingPlotType(variables.varA,variables.varB) === "ScatterPlot" ? (     <NumberNumber 
-               /*
+              
                 variableA={variables.varDataA.map((i) => i.value)}
                 variableB={variables.varDataB.map((i) => i.value)}
                 
-                          xData={variables.varDataA.map((i) => i.value)}
-                          yData={variables.varDataB.map((i) => i.value)}
-                          */
-                          variableA = {arrayBig}
-                          variableB = {arraySmall}
                 labelA={getEntryByLabel(variables.varAName)?.name}
                 labelB={getEntryByLabel(variables.varBName)?.name}
 
