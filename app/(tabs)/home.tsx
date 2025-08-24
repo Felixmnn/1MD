@@ -268,14 +268,13 @@ type SelectedData = {
   return ( 
     <SafeAreaView edges={['top']} className='flex-1 px-2 bg-gray-900'>
       <ScrollView className='flex-1 bg-gray-900'>
-        <View className='flex-row justify-between items-center'>
-          <Text className='text-white font-bold text-center text-xl p-2 my-2 rounded-md '
-            style={{
-                backgroundColor: dataSaved ? "#0c1f44ff" : undefined,
-            }}
-            >
-              {dataSaved ? selectedData.date + t('home.dateCompleated') : selectedData.date}
-          </Text>
+        <View className='flex-row justify-between items-center mb-2'>
+            <CustomButton
+                title={dataSaved ? selectedData.date + t('home.dateCompleated') : selectedData.date + " Speichern"}
+                onPress={async() => { await  makeEntry(selectedData)}}
+                isDisabled={isCompleated(selectedData) !== ""}
+                aditionalStyles={`flex-1 mr-2 ${isCompleated(selectedData) !== "" ? "opacity-50" : ""}`}
+            />
           <TouchableOpacity className=' p-2 rounded-full items-center justify-center' style={{backgroundColor:"#0c1f44ff" }} onPress={()=> router.push("/(profile)/profile")}>
               <Icon
               name="user-circle"

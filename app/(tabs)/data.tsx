@@ -343,16 +343,12 @@ const Data = () => {
       <CustomBottomSheet ref={bottomSheetRef}>
         <View className='flex-1'>
           <View className='flex-row justify-between items-center'>
-            <Text
-              className='text-white font-bold text-center text-xl p-2 my-2 rounded-md '
-              style={
-                selectedData.date
-                  ? { backgroundColor: "rgba(8, 45, 109, 0.3)" }
-                  : undefined
-              }
-            >
-              {selectedData.date ? `${selectedData.date} ${t('data.bottomSheet.complete')}` : selectedData.date}
-            </Text>
+            <CustomButton
+                title={selectedData.date ? `${selectedData.date} ${t('data.bottomSheet.complete')}` : selectedData.date}
+                 onPress={async () => { updateSpecificEntry(selectedData.date, selectedData)}}
+                  aditionalStyles='mb-2 w-full px-2'
+            />
+            
           </View> 
       <DiplayAndEditDay
         selectedData={selectedData}

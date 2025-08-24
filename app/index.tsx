@@ -169,7 +169,7 @@ export default function Index() {
     <View className={`flex-1 px-6 justify-center items-center ${scheme === "dark" ? "bg-neutral-900" : "bg-white"}`}>
       {/* App Icon */}
       <Image
-        source={require("../assets/images/adaptive-icon.png")}
+        source={require("../assets/images/splash-icon.png")}
         style={{ width: 100, height: 100, marginBottom: 20, borderRadius: 20 }}
         resizeMode="contain"
       />
@@ -224,6 +224,7 @@ export default function Index() {
       <Toast config={toastConfig} />
 
       {/* View AGB */}
+      {!agbAccepted && (
       <TouchableOpacity
         onPress={() => bottomSheetRef.current?.openSheet(0)}
         className="mt-4"
@@ -232,8 +233,10 @@ export default function Index() {
           {t("login.viewAGB")}
         </Text>
       </TouchableOpacity>
+      )}
 
       {/* AGB Bottom Sheet */}
+      
       <CustomBottomSheet ref={bottomSheetRef}>
         <View className="p-4">
           {agbs.map((line: string, index: number) => (

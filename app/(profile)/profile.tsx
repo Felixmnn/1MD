@@ -216,7 +216,7 @@ const Profile = () => {
             onPress={() => changeLanguage('en')}
             className={`px-4 py-2 rounded-lg ${currentLang === 'en' ? '#facc15' : '#0c1f44ff'}`}
             style={{
-              backgroundColor: currentLang === 'en' ? '#075606ff' : '#0c1f44ff',
+              backgroundColor: currentLang === 'en' ? '#facc15' : '#0c1f44ff',
             }}
           >
             <Text className="text-white font-semibold">English</Text>

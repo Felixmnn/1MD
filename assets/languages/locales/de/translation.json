@@ -72,7 +72,7 @@
     "noEntriesTitle": "Keine Einträge gefunden",
     "noEntriesMessage": "Wähle einen anderen Tag aus oder füge Einträge hinzu.",
     "bottomSheet": {
-      "complete": " Vollständig"
+      "complete": " Aktualisieren"
     },
     "buttons": {
       "saveData": "Daten speichern",
@@ -85,7 +85,7 @@
       "errorMessage": "Speichern des Eintrags fehlgeschlagen."
     }
   },"home": {
-    "dateCompleated": " Vollständig",
+    "dateCompleated": " Aktualisieren",
     "saveData": "Daten speichern",
     "updateData": "Daten aktualisieren",
     "missingData": "Fehlende Daten",

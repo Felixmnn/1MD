@@ -71,7 +71,7 @@
     "noEntriesTitle": "No entries found",
     "noEntriesMessage": "Select another day or add entries.",
     "bottomSheet": {
-      "complete": " Complete"
+      "complete": " Update Data"
     },
     "buttons": {
       "saveData": "Save Data",
@@ -84,7 +84,7 @@
       "errorMessage": "Failed to save entry."
     }
   },"home": {
-    "dateCompleated": " Complete",
+    "dateCompleated": " Update Data",
     "saveData": "Save Data",
     "updateData": "Update Data",
     "missingData": "Missing Data",
