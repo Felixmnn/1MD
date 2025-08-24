@@ -106,7 +106,6 @@ export const BooleanBooleanChart: React.FC<Props> = ({
    */
   const handleCellPress = (cellA: boolean, cellB: boolean, value: number) => {
     if (setBoolBoolData) {
-      console.log('Cell Pressed:', cellA, cellB, value);
       setBoolBoolData({
         ...boolBoolData,
         selectedField: [cellA, cellB, value, parseFloat(((value / total) * 100).toFixed(1))],

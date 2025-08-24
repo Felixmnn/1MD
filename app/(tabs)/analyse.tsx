@@ -400,8 +400,7 @@ function generateCorrelatedNumericArrays(length = 100) {
 }
 
 const { arraySmall, arrayBig } = generateCorrelatedNumericArrays();
-console.log(arraySmall);
-console.log(arrayBig);
+
 
 
   

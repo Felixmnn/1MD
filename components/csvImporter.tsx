@@ -31,7 +31,6 @@ const CsvImportScreen: React.FC<CsvImportScreenProps> = ({
    * - Opens a file picker, reads the selected file, parses its content, and adds entries to the database.
    */
   const handleImportCSV = async () => {
-    console.log('Importing CSV...'); // Log the start of the import process
     try {
       // Open the document picker to select a CSV file
       const result = await DocumentPicker.getDocumentAsync({
@@ -79,7 +78,6 @@ const CsvImportScreen: React.FC<CsvImportScreenProps> = ({
 
         // Iterate through the parsed data and add each entry to the database
         for (let i = 0; i < parsed.data.length; i++) {
-          console.log(parsed.data[i]); // Log each entry for debugging
           try {
             await addEntry({
               date: parsed.data[i].date,
@@ -115,12 +113,10 @@ const CsvImportScreen: React.FC<CsvImportScreenProps> = ({
         router.push("/")
       } else {
         // Notify cancellation if the user cancels the file selection
-        console.log('CSV import cancelled by user'); // Log cancellation
         handleToast('cancelled');
       }
     } catch (error) {
       // Handle any errors during the import process
-      console.error('Error importing CSV:', error);
       handleToast('error');
     }
   };
@@ -130,7 +126,6 @@ const CsvImportScreen: React.FC<CsvImportScreenProps> = ({
       title={t('csvImport.importButton')} // Localized button title
       aditionalStyles="flex-1 m-1" // Additional styles for the button
       onPress={async () => {
-        console.log('CSV import button pressed'); // Log button press
         await handleImportCSV(); // Trigger the CSV import process on button press
       }}
     />

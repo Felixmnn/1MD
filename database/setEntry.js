@@ -107,7 +107,6 @@ export async function addEntry(data) {
         VALUES ("${date}", ${data.overallDayRating});
       `);
     } catch (error) {
-      console.error("Error inserting data:", error);
       return false;
     }
 

@@ -9,6 +9,7 @@ import ResetPasswordModal from '@/components/resetPasswort';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTranslation } from 'react-i18next';
 import i18n from '@/assets/languages/i18n';
+import { router } from 'expo-router';
 
 /**
  * The Profile component provides a user interface for managing user settings, wich currently includes:
@@ -142,6 +143,7 @@ const Profile = () => {
                   await initializeTable();
                   showToast('error',t('profile.csv.deleteSuccessTitle'), t('profile.csv.deleteSuccessMessage'));
                   setAreYouSure(false);
+                  router.push("/");
                 } catch {
                   showToast('error',t('profile.csv.deleteErrorTitle'), t('profile.csv.deleteErrorMessage'));
                 }

@@ -60,7 +60,6 @@ export async function getDataForVariable(table, columnName) {
 
     // Fetch all rows for the specified column and date
     const res = await db.getAllAsync(`SELECT ${columnName}, date FROM ${table}`);
-    console.log("Result from database:", res);
     try {
         // Handle columns that store JSON arrays
         if (columnName == "thingsLearned" || columnName == "somethingSpecial") {
@@ -71,7 +70,6 @@ export async function getDataForVariable(table, columnName) {
                     ? 0 // If the value is empty, null, or an empty array, return 0
                     : JSON.parse(row[columnName]).length // Parse the JSON and return its length
             }));
-            if (array.value > 0) console.log("Array data:", array);
             return array;
         } else {
             // Handle other column types

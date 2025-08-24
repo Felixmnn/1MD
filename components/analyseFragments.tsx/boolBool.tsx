@@ -23,7 +23,6 @@ const BoolBool: React.FC<BoolBoolProps> = ({
   labelB = 'Variable B',
   selectedField = [null, null, 0, 0],
 }) => {
-  console.log("Var A and Var B:", variableA, variableB);
   const { t } = useTranslation();
 
   // --- Validation ---
