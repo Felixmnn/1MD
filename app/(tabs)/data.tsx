@@ -240,7 +240,7 @@ const Data = () => {
         steps: selectedData.steps,
         workout: selectedData.workout,
         workoutDuration: selectedData.workoutDuration,
-        workoutIntensity: selectedData.workoutIntensity,
+        workoutIntensity: selectedData.workoutIntensity ? validEnumValues.workoutIntensity.indexOf(selectedData.workoutIntensity) : null,
         sleepQuality: selectedData.sleepQuality ? validEnumValues.sleepQuality.indexOf(selectedData.sleepQuality) : null,
         socialInteractions: selectedData.socialInteractions,
         goodSocialInteractions: selectedData.goodSocialInteractions,
@@ -301,6 +301,7 @@ const Data = () => {
         data={pastEntries.filter(item => item.date.includes(filterDay))}
         keyExtractor={(item) => item.date}
         numColumns={numColumns}
+        style={{ marginHorizontal: 4}}
         ListEmptyComponent={
           <View className="flex-1 items-center justify-center py-10 m-2 rounded-lg"
             style={{ backgroundColor: '#0c1f44ff' }}

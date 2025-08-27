@@ -217,7 +217,7 @@ const CustomLineChart = ({
     labels: getLabels(clusteredData.length),
     datasets: [
       {
-        data: clusteredData,
+        data: clusteredData.reverse(),
         strokeWidth: 2,
       },
     ],

@@ -90,7 +90,6 @@ export async function addEntry(data) {
     } catch (error) {
       date = data.date;
     }
-
     const d = (data.workHours = Math.floor(data.workHours));
     try {
       await db.execAsync(`

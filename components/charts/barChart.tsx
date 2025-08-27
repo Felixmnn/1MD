@@ -99,25 +99,34 @@ const CustomBarChart: React.FC<CustomBarChartProps> = ({
    * - Divides the range into equal steps for better readability.
    */
   const steps = 5;
-  const barChartY: number[] = [];
+  let barChartY: number[] = [];
   for (let i = steps; i >= 0; i--) {
     barChartY.push(Math.round(highestValue * (i / steps)));
   }
 
+  // Doppelte entfernen
+  barChartY = Array.from(new Set(barChartY));
+
+  // Sicherstellen, dass min und max enthalten sind
+  if (!barChartY.includes(0)) barChartY.push(0);
+  if (!barChartY.includes(highestValue)) barChartY.unshift(highestValue);
+
+  // Absteigend sortieren
+  barChartY = barChartY.sort((a, b) => b - a);
+
   return (
     <View className="flex-col px-2 w-full h-full items-center justify-center">
       {/* Chart Title */}
-      <Text className="text-white text-lg mb-2">{t('customBarChart.title')}</Text>
 
-      <View className="flex-row items-center flex-1">
+      <View className="flex-row items-center flex-1 mt-5">
         {/* Y-Axis */}
-        <View className="items-end justify-between h-[170px]">
-          {barChartY.map((value, idx) => (
-            <Text key={idx} className="text-white text-right pr-2 text-xs">
-              {value}
-            </Text>
-          ))}
-        </View>
+<View className="items-end justify-between h-[170px] mb-5">
+  {barChartY.map((value, idx) => (
+    <Text key={idx} className="text-white text-right pr-2 text-xs">
+      {value}
+    </Text>
+  ))}
+</View>
 
         {/* Bars */}
         <View className="flex-1">
@@ -127,7 +136,7 @@ const CustomBarChart: React.FC<CustomBarChartProps> = ({
                 key={idx}
                 className="flex-1 relative justify-end mx-0.5"
                 style={{
-                  height: `${(value / highestValue) * 100}%`,
+height: `${Math.max((value / highestValue) * 100, 2)}%`,
                   backgroundColor: selectedBarIndex === idx ? '#facc15' : '#1e90ff',
                 }}
                 onPress={() => setSelectedBarIndex(idx)}

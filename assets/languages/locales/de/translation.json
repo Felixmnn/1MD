@@ -432,26 +432,31 @@
       "label": "Gesamtbewertung des Tages"
     }
   }
-  },
-
-  "pages": {
+  },"pages": {
     "correlation": "Verlauf über Zeitraum",
     "change": "Zusammenhänge entdecken"
-  },
-  "alerts": {
+  },"alerts": {
     "noDataTitle": "Keine Daten gefunden",
     "noDataMessage": "Für die Variable {{variable}} wurden keine Daten gefunden. Bitte wähle eine andere Variable."
-  },
-  "buttons": {
+  }, "buttons": {
     "variable1": "Variable 1",
     "variable2": "Variable 2",
     "createFirstEntry": "Erstelle einen ersten Eintrag."
   },
   "analysis": {
-    "selectTwoVariables": "Bitte wähle zwei Variablen aus, um eine Analyse durchzuführen.",
-    "almostThere": "Fast geschafft! Nur noch {{remaining}} Einträge bis zur ersten aussagekräftigen Analyse."
-  },
-  "categories": {
+    "selectedTitle": "Ausgewählter Fall",
+    "noCaseSelected": "Kein Fall gewählt",
+    "selectedDescription": "Bei einer {{varAName}} von {{selectedField0}} liegt {{varBName}} in diesem Fall bei {{selectedField1}}. Das entspricht {{selectedField2}}% aller Fälle.",
+    
+    "hypothesisTitle": "Hypothese",
+    "hypothesisDescription": "Ab 10 Einträgen kannst du hier eine Hypothese zum Zusammenhang zwischen {{varAName}} und {{varBName}} sehen.",
+    
+    "recommendationTitle": "Empfehlung",
+    "recommendationDescription": "Hier steht dann eine Empfehlung, wie du die {{varAName}} oder {{varBName}} optimieren kannst."
+  
+
+
+  },"categories": {
     "physicalHealth": "Körperliche Gesundheit",
     "mentalHealth": "Mentale Gesundheit",
     "work": "Arbeit",
@@ -476,8 +481,7 @@
     "recommendationTitle": "⚡ Empfehlung",
     "selectedNone": "Keine Auswahl getroffen."
 
-  },
-  "boolBool": {
+  },"boolBool": {
     "errorInvalidData": "Ungültige Daten: Die Arrays müssen die gleiche Länge haben.",
     "selectedTitle": "✅ Ausgewähltes Feld",
     "selectedDescription": "Der Fall, bei dem {{labelA}} {{fieldA}} ist und {{labelB}} {{fieldB}} ist, tritt in {{percent}}% der Fälle auf.",

@@ -467,9 +467,17 @@
     "createFirstEntry": "Create a first entry."
   },
   "analysis": {
-    "selectTwoVariables": "Please select two variables to perform an analysis.",
-    "almostThere": "Almost there! Only {{remaining}} entries left until the first meaningful analysis."
-  },
+  "selectedTitle": "Selected Case",
+  "noCaseSelected": "No case selected",
+  "selectedDescription": "With a {{varAName}} of {{selectedField0}}, the {{varBName}} in this case is {{selectedField1}}. This corresponds to {{selectedField2}}% of all cases.",
+  
+  "hypothesisTitle": "Hypothesis",
+  "hypothesisDescription": "With at least 10 entries, you can see a hypothesis about the relationship between {{varAName}} and {{varBName}} here.",
+  
+  "recommendationTitle": "Recommendation",
+  "recommendationDescription": "Here you will find a recommendation on how you can optimize {{varAName}} or {{varBName}}."
+}
+,
   "categories": {
     "physicalHealth": "Physical Health",
     "mentalHealth": "Mental Health",

@@ -65,9 +65,7 @@ const CustomTextInput = ({
           : isFocussed
           ? undefined
           : '#133078ff',
-        outlineOffset: 2,
-        outlineStyle: 'none',
-        outlineWidth: 2,
+        
       } as any}
       // Event handlers for focus and blur
       onFocus={() => setIsFocused(false)}

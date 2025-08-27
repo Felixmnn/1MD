@@ -31,7 +31,7 @@ const CustomBottomSheet = forwardRef<CustomBottomSheetRef, CustomBottomSheetProp
     const sheetRef = useRef<BottomSheet>(null);
 
     // Snap points define the heights the bottom sheet can snap to
-    const snapPoints = ['20%', '60%', '90%'];
+    const snapPoints = ['20%', '40%', '60%', '80%'];
 
     /**
      * Expose methods to the parent component using `useImperativeHandle`.

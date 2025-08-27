@@ -60,25 +60,31 @@ export async function getDataForVariable(table, columnName) {
 
     // Fetch all rows for the specified column and date
     const res = await db.getAllAsync(`SELECT ${columnName}, date FROM ${table}`);
+    let array = [];
     try {
         // Handle columns that store JSON arrays
         if (columnName == "thingsLearned" || columnName == "somethingSpecial") {
-            
-            const array = res.map(row => ({
+                
+             array = res.map(row => ({
                 date: row["date"], // Extract the date
-                value: row[columnName] == "" || row[columnName] == "[]" || row[columnName] == null 
-                    ? 0 // If the value is empty, null, or an empty array, return 0
-                    : JSON.parse(row[columnName]).length // Parse the JSON and return its length
+                value: !row[columnName] || row[columnName] === "" || row[columnName] === "[]" 
+                    ? 0
+                    : JSON.parse(row[columnName].replace(/'/g, '"')).length
             }));
-            return array;
+
+            
         } else {
             // Handle other column types
-            const array = res.map(row => ({
+             array = res.map(row => ({
                 date: row["date"], // Extract the date
                 value: row[columnName] // Extract the column value
             }));       
-            return array;
+        
         }
+        console.log(array);
+        array.sort((a, b) => new Date(a.date) - new Date(b.date)); // Sort by date
+        console.log(array);
+        return array;
     } catch (error) {
         // Return an empty array in case of an error
         return [];

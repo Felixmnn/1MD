@@ -241,10 +241,12 @@ const Analyse = () => {
         const data2 = await getDataForVariable("work", "productivity");
 
         if (data1.length > 0 && data2.length > 0) {
+          const filteredData1 = data1.filter(d => data2.some(item => item.date === d.date));
+          const filteredData2 = data2.filter(d => data1.some(item => item.date === d.date));
           setVariables(prev => ({
             ...prev,
-            varDataA: data1,
-            varDataB: data2,
+            varDataA: filteredData1,
+            varDataB: filteredData2,
             varAName: "sleepQuality",
             varBName: "productivity",
             varA: "enum",
@@ -381,8 +383,8 @@ const lastDate = lastDateString
 
 
 
-  
-
+    const varAName =  getEntryByLabel(variables.varAName)?.name;
+    const varBName = getEntryByLabel(variables.varBName)?.name;
   return (
       <SafeAreaView edges={['top']} className='h-full w-full bg-gray-900 items-center '>
         <Text className='text-white font-bold text-2xl mb-4'>{data[currentIndex].title}</Text>
@@ -547,7 +549,57 @@ const lastDate = lastDateString
               filteredData={filteredData}
               setFilteredData={setFilteredData}
               />
-            ) : (
+            ) : variables.varDataA.length < 10 ?
+            (
+              <View>
+  {/* Ausgewählter Fall */}
+  <View className="rounded-md p-4 mt-2" style={{ backgroundColor: '#0c1f44ff' }}>
+    <Text className="font-bold text-gray-200 text-lg mb-2">
+      {t('boolBool.selectedTitle')}
+    </Text>
+    <Text className="text-gray-200">
+      {enumEnumData.selectedField[0] == null
+        ? t('analysis.noCaseSelected')
+        : t('analysis.selectedDescription', {
+            varAName: varAName,
+            varBName: varBName,
+            selectedField0: enumEnumData.selectedField[0],
+            selectedField1: enumEnumData.selectedField[1],
+            selectedField2: enumEnumData.selectedField[2],
+          })}
+    </Text>
+  </View>
+
+  {/* Hypothese */}
+  <View className="rounded-md p-4 mt-2" style={{ backgroundColor: '#0c1f44ff' }}>
+    <Text className="text-gray-200 font-bold text-lg mb-2">
+      {t('boolBool.hypothesisTitle')}
+    </Text>
+    <Text className="text-gray-200">
+      {t('analysis.hypothesisDescription', {
+        varAName: varAName,
+        varBName: varBName,
+      })}
+    </Text>
+  </View>
+
+  {/* Empfehlung */}
+  <View className="rounded-md p-4 mt-2" style={{ backgroundColor: '#0c1f44ff' }}>
+    <Text className="text-gray-200 font-bold text-lg mb-2">
+      {t('boolBool.recommendationTitle')}
+    </Text>
+    <Text className="text-gray-200">
+      {t('analysis.recommendationDescription', {
+        varAName: varAName,
+        varBName: varBName,
+      })}
+    </Text>
+  </View>
+</View>
+
+            )
+            
+            :(
           <View className='flex-1'>
             {/* Variable Selection */}
             <View className='flex-row'>
