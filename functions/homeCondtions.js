@@ -1,3 +1,9 @@
+import { useTranslation } from "react-i18next";
+
+ 
+const { t } = useTranslation();
+
+
 /**
  * isCompleated Function
  * - Checks if all required conditions for the selected data are met.

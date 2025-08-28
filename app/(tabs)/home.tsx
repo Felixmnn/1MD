@@ -271,7 +271,7 @@ type SelectedData = {
       <ScrollView className='flex-1 bg-gray-900'>
         <View className='flex-row justify-between items-center mb-2'>
             <CustomButton
-                title={dataSaved ? selectedData.date + t('home.dateCompleated') : selectedData.date + " Speichern"}
+                title={dataSaved ? selectedData.date + t('home.dateCompleated') : selectedData.date + t('home.saveData')}
                 onPress={async() => { await  makeEntry(selectedData)}}
                 isDisabled={isCompleated(selectedData) !== ""}
                 aditionalStyles={`flex-1 mr-2 ${isCompleated(selectedData) !== "" ? "opacity-50" : ""}`}
