@@ -4,7 +4,7 @@
     "slug": "1MD",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/splash-icon.png",
+    "icon": "./assets/images/icon.png",
     "scheme": "omd",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
