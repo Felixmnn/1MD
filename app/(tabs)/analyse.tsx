@@ -115,37 +115,38 @@ const Analyse = () => {
   }
 
   function fillAndSortData(
-    data: { date: string; value: number }[]
-  ) {
-    function parseDate(dateStr: string) {
-      let [day, month, year] = dateStr.split('.').map(Number);
-      return new Date(year, month - 1, day);
-    }
-
-    function formatDate(date: Date) {
-      return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
-    }
-
-    let dateMap = new Map();
-    data.forEach(item => {
-      dateMap.set(formatDate(parseDate(item.date)), item.value);
-    });
-
-    let earliestDate = new Date(Math.min(...data.map(d => parseDate(d.date).getTime())));
-    let today = new Date();
-
-    let result: { date: string; value: number }[] = [];
-    for (let d = new Date(earliestDate); d <= today; d.setDate(d.getDate() + 1)) {
-      let key = formatDate(d);
-      result.push({
-        date: key,
-        value: dateMap.has(key) ? dateMap.get(key) : -1
-      });
-    }
-
-    result.sort((a, b) => parseDate(a.date).getTime() - parseDate(b.date).getTime());
-    return result;
+  data: { date: string; value: number }[]
+) {
+  function parseDate(dateStr: string) {
+    let [day, month, year] = dateStr.split('.').map(Number);
+    return new Date(year, month - 1, day);
   }
+
+  function formatDate(date: Date) {
+    return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
+  }
+
+  let dateMap = new Map();
+  data.forEach(item => {
+    dateMap.set(formatDate(parseDate(item.date)), item.value);
+  });
+
+  let earliestDate = new Date(Math.min(...data.map(d => parseDate(d.date).getTime())));
+  let latestDate = new Date(Math.max(...data.map(d => parseDate(d.date).getTime()))); // nur bis neuestes Datum
+
+  let result: { date: string; value: number }[] = [];
+  for (let d = new Date(earliestDate); d <= latestDate; d.setDate(d.getDate() + 1)) {
+    let key = formatDate(d);
+    result.push({
+      date: key,
+      value: dateMap.has(key) ? dateMap.get(key) : -1
+    });
+  }
+
+  result.sort((a, b) => parseDate(a.date).getTime() - parseDate(b.date).getTime());
+  return result;
+}
+
 
 
 

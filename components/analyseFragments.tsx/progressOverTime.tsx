@@ -124,13 +124,32 @@ const ProgressOverTime = ({
       <View className="bg-white/10 p-4 rounded-xl w-full mt-2" style={{ backgroundColor: '#0c1f44ff' }}>
         <Text className="text-white text-lg font-semibold">{t('progressOverTime.changeTimeframe')}</Text>
         <CustomDateRangeSlider
-          endDate={new Date()}
+          endDate={
+            rawData.length > 0
+              ? (() => {
+                  try {
+                    const latest: Date = (rawData as Array<{ date: string }>).reduce(
+                      (max: Date, item: { date: string }) => {
+                      const [day, month, year]: number[] = item.date.split('.').map(Number);
+                      const dateObj: Date = new Date(year, month - 1, day);
+                      return dateObj > max ? dateObj : max;
+                      },
+                      new Date(0)
+                    );
+                    return latest;
+                  } catch {
+                    return new Date(); // failsafe
+                  }
+                })()
+              : new Date() // fallback, falls rawData leer
+          }
           entryCount={rawData.length}
           onChange={(start, end, dates) => {
             const sliced = rawData.length > 1 ? rawData.slice(start, end + 1) : rawData;
             setFilteredData(sliced);
           }}
         />
+
       </View>
     </View>
   );
