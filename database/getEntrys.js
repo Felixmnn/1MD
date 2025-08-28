@@ -81,11 +81,10 @@ export async function getDataForVariable(table, columnName) {
             }));       
         
         }
-        console.log(array);
         array.sort((a, b) => new Date(a.date) - new Date(b.date)); // Sort by date
-        console.log(array);
         return array;
     } catch (error) {
+        
         // Return an empty array in case of an error
         return [];
     }

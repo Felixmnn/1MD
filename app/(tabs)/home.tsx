@@ -228,7 +228,7 @@ type SelectedData = {
           date: selectedData.date,
 
           workHours: selectedData.workHours,
-          thingsLearned: selectedData.thingsLearned && selectedData.thingsLearned.length > 0 ? selectedData.thingsLearned : null,
+          thingsLearned: typeof selectedData.thingsLearned != "undefined" && selectedData.thingsLearned.length > 0 ? selectedData.thingsLearned : null,
           productivity: validEnumValues.productivity.indexOf(selectedData.productivity ?  selectedData.productivity : "") !== -1 ? validEnumValues.productivity.indexOf(selectedData.productivity ? selectedData.productivity : "") : null,
           
           sleepDuration: selectedData.sleepDuration,
@@ -245,7 +245,7 @@ type SelectedData = {
           socialMediaUsageMorning: selectedData.socialMediaUsageMorning,
           socialMediaUsageEvening: selectedData.socialMediaUsageEvening,
           avoidedBadHabits: selectedData.avoidedBadHabits,
-          somethingSpecial: selectedData.somethingSpecial && selectedData.somethingSpecial.length > 0 ? selectedData.somethingSpecial : null,
+          somethingSpecial: typeof selectedData.somethingSpecial != "undefined" && selectedData.somethingSpecial.length > 0 ? selectedData.somethingSpecial : null,
 
           
           overallDayRating: selectedData.overallDayRating,

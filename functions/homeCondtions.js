@@ -1,7 +1,4 @@
-import { useTranslation } from "react-i18next";
 
- 
-const { t } = useTranslation();
 
 
 /**
@@ -14,14 +11,15 @@ const { t } = useTranslation();
  */
 export function isCompleated(selectedData) {
     let output = "";
+    
     if (workConditions(selectedData) === false) {
-        output += "Work, ";
+        output += "🛠️";
     } else if (physicalHealthConditions(selectedData) === false) {
-        output += "Physical Health, ";
+        output += "💪";
     } else if (mentalHealthConditions(selectedData) === false) {
-        output += "Mental Health, ";
+        output += "🧠";
     } else if (selectedData.overallDayRating === null) {
-        output += "Overall Day Rating, ";
+        output += "⭐";
     }
     return output;
 }
