@@ -196,6 +196,7 @@ const Data = () => {
         };
       }
         try {
+          console.log(todayEntry);
           setSelectedData({
           ...selectedData,
           date: todayEntry.date,

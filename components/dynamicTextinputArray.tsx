@@ -42,6 +42,7 @@ const DynamicTextInputArray: React.FC<DynamicTextInputArrayProps> = ({
 }) => {
 
   const {t} = useTranslation();
+  //return <></>
   return (
     <View className="px-2">
       {/* Section Title and Add Button */}

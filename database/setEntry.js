@@ -82,7 +82,22 @@ export async function addEntry(data) {
   const db = await SQLite.openDatabaseAsync('1MD', {
     useNewConnection: true,
   });
-
+  console.log("Adding Entry:", data);
+  /*
+  Home
+  Adding entry with data: {"avoidedBadHabits": false, "badSocialInteractions": 0, "date": "28.8.2025", "goodSocialInteractions": 0, "kcal": 3500, "overallDayRating": 3, "productivity": 4, "sleepDuration": 9, "sleepQuality": 3, "socialInteractions": 12, "socialMediaUsageEvening": false, "socialMediaUsageMorning": false, 
+  "somethingSpecial": ["Burger", "Pommes"], "steps": 3000, 
+  "thingsLearned": ["Burger", "Pommes"], "workHours": 12, "workout": false, "workoutDuration": null, "workoutIntensity": null}
+  
+  Importer
+  LOG  Things learned at [{"avoidedBadHabits": "false", "badSocialInteractions": "", "date": "28.8.2025", "goodSocialInteractions": "", "kcal": "", "overallDayRating": "", "productivity": "2", "sleepDuration": "", "sleepQuality": "", "socialInteractions": "", "socialMediaUsageEvening": "false", "socialMediaUsageMorning": "false", 
+    "somethingSpecial": "", "steps": "",
+    "thingsLearned": "Burger2,Pommes2", "workHours": "12", "workout": "false", "workoutDuration": "", "workoutIntensity": ""}]
+  
+  Exporter
+  🐋Work Results {"date": "28.8.2025", "productivity": 4, "thingsLearned": "['Burger','Pommes']", "workHours": 12}
+  🔥Things Learned {"avoidedBadHabits": 0, "badSocialInteractions": 0, "date": "28.8.2025", "goodSocialInteractions": 0, "socialInteractions": 12, "socialMediaUsageEvening": 0, "socialMediaUsageMorning": 0, "somethingSpecial": "['Burger','Pommes']"}
+    */
   try {
     let date;
     try {
@@ -90,8 +105,9 @@ export async function addEntry(data) {
     } catch (error) {
       date = data.date;
     }
+    console.log("Home\nAdding entry with data:", data);
     const d = (data.workHours = Math.floor(data.workHours));
-    try {
+     try {
       await db.execAsync(`
         INSERT OR REPLACE INTO work (date, workHours, thingsLearned, productivity)
         VALUES ("${date}", ${d}, "${data.thingsLearned ? JSON.stringify(data.thingsLearned).replace(/"/g, "'") : ''}", ${data.productivity});
@@ -106,6 +122,7 @@ export async function addEntry(data) {
         VALUES ("${date}", ${data.overallDayRating});
       `);
     } catch (error) {
+      console.log("Error during insert:", error);
       return false;
     }
 
@@ -231,7 +248,12 @@ export async function getAndTransformallEntries() {
 
     let allEntries = [];
 
+
+    console.log("🐋Work Results",workResult.filter(entry => entry.date == "28.8.2025")[0])
+    console.log("🔥Things Learned",mentalHealthResult.filter(entry => entry.date == "28.8.2025")[0])
+
     for (let i = 0; i < workResult.length; i++) {
+      
       allEntries = [
         ...allEntries,
         {
@@ -263,8 +285,8 @@ export async function getAndTransformallEntries() {
           overallDayRating: overallDayRatingResult[i]?.overallDayRating,
         },
       ];
-    }
-
+    
+      }
     return allEntries;
   } catch (error) {
     return [];

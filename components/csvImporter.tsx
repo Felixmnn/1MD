@@ -75,21 +75,25 @@ const CsvImportScreen: React.FC<CsvImportScreenProps> = ({
           header: true,
           skipEmptyLines: true,
         });
-
+        /*
+         LOG  Things learned at [{"avoidedBadHabits": "false", "badSocialInteractions": "", "date": "28.8.2025", "goodSocialInteractions": "", "kcal": "", "overallDayRating": "", "productivity": "2", "sleepDuration": "", "sleepQuality": "", "socialInteractions": "", "socialMediaUsageEvening": "false", "socialMediaUsageMorning": "false", 
+         "somethingSpecial": "", "steps": "",
+          "thingsLearned": "Burger2,Pommes2", "workHours": "12", "workout": "false", "workoutDuration": "", "workoutIntensity": ""}]
+        */
         // Iterate through the parsed data and add each entry to the database
         for (let i = 0; i < parsed.data.length; i++) {
           try {
-            await addEntry({
+           await addEntry({
               date: parsed.data[i].date,
               workHours: parseInt(parsed.data[i].workHours ?? '') ?? 0,
-              thingsLearned: parsed.data[i].thingsLearned ?? '',
+                thingsLearned: parsed.data[i].thingsLearned && typeof parsed.data[i].thingsLearned == "string"  ? (parsed.data[i].thingsLearned?? '').split(",") :  '',
               productivity: parseInt(parsed.data[i].productivity ?? '') ?? 0,
               sleepDuration: parseInt(parsed.data[i].sleepDuration ?? '') ?? -1,
               sleepQuality: parseInt(parsed.data[i].sleepQuality ?? '') ?? -1,
               kcal: parseInt(parsed.data[i].kcal ?? '') ?? -1,
               steps: parseInt(parsed.data[i].steps ?? '') ?? -1,
               workout: parsed.data[i].workout?.toLowerCase() === 'true',
-              workoutDuration: parseInt(parsed.data[i].workoutDuration ?? '') ?? -1,
+              workoutDuration: !isNaN(parseInt(parsed.data[i].workoutDuration ?? '')) ?   parseInt(parsed.data[i].workoutDuration ?? '') : -1,
               workoutIntensity: parsed.data[i].workoutIntensity && parsed.data[i].workoutIntensity !== 'none'
                 ? parseInt(parsed.data[i].workoutIntensity ?? '')
                 : -1,
@@ -99,11 +103,16 @@ const CsvImportScreen: React.FC<CsvImportScreenProps> = ({
               socialMediaUsageMorning: parsed.data[i].socialMediaUsageMorning?.toLowerCase() === 'true',
               socialMediaUsageEvening: parsed.data[i].socialMediaUsageEvening?.toLowerCase() === 'true',
               avoidedBadHabits: parsed.data[i].avoidedBadHabits?.toLowerCase() === 'true',
-              somethingSpecial: parsed.data[i].somethingSpecial ?? '',
+              
+              somethingSpecial: typeof (parsed.data[i].somethingSpecial ?? '') === "string" ? (parsed.data[i].somethingSpecial ?? '').split(",") : '',
+
+
               overallDayRating: parseInt(parsed.data[i].overallDayRating ?? '') ?? -1,
             });
+
           } catch (error) {
             // Handle errors for individual entries
+            console.log("Error adding entry:", error);
             handleToast('error');
           }
         }

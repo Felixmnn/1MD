@@ -29,7 +29,7 @@ export const handleExportCSV = async (
 ) => {
   // Fetch and transform all entries from the database
   const allEntries = await getAndTransformallEntries();
-
+  console.log("Exporting entries:", allEntries);
   // Convert the entries to a CSV string
   const csv = Papa.unparse(allEntries);
 

@@ -1,5 +1,5 @@
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { use, useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import CustomButton from '@/components/customButton'
@@ -209,6 +209,7 @@ type SelectedData = {
     avoidedBadHabits: null,
   });
 
+
   const [ validEnumValues, setValidEnumValues ] = React.useState({
       productivity: ["bed", "battery-quarter","tasks", "chart-line", "rocket"],
       workoutType: ["none", "strength", "cardio", "flexibility"],
@@ -250,7 +251,7 @@ type SelectedData = {
           overallDayRating: selectedData.overallDayRating,
 
       };
-      
+      console.log("Things learned wird so gespeichert:", transformedData.thingsLearned)
       await addEntry(transformedData);
       setDataSaved(true);
       showToast('success', t('home.toast.successTitle'), t('home.toast.successMessage') );
