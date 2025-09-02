@@ -1,15 +1,15 @@
-import { useEffect, useRef, useState } from "react";
-import { View, Text, Image, TouchableOpacity, useColorScheme } from "react-native";
+import { use, useEffect, useRef, useState } from "react";
+import { View, Text, Image, TouchableOpacity, useColorScheme, ActivityIndicator } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as LocalAuthentication from "expo-local-authentication";
 import { router } from "expo-router";
-import CustomTextInput from "@/components/customTextInput";
-import CustomButton from "@/components/customButton";
+import CustomTextInput from "@/components/gui/customTextInput";
+import CustomButton from "@/components/gui/customButton";
 import { initializeTable } from "@/database/setEntry";
 import Toast, { BaseToast, ToastConfigParams } from "react-native-toast-message";
 import { useTranslation } from "react-i18next";
 import { initNotificationChannel, scheduleDailyReminder } from "@/functions/notifications";
-import CustomBottomSheet, { CustomBottomSheetRef } from "@/components/customBottomSheet";
+import CustomBottomSheet, { CustomBottomSheetRef } from "@/components/gui/customBottomSheet";
 import i18n from "@/assets/languages/i18n";
 
 /**
@@ -19,7 +19,7 @@ import i18n from "@/assets/languages/i18n";
 export default function Index() {
   // Translation hook
   const { t } = useTranslation();
-
+  
   // State variables
   const [passwordInput, setPasswordInput] = useState("");
   const [storedPassword, setStoredPassword] = useState<string | null>(null);
@@ -28,6 +28,9 @@ export default function Index() {
   const [agbAccepted, setAgbAccepted] = useState(false);
   const scheme = useColorScheme(); // Detects light or dark mode
   const bottomSheetRef = useRef<CustomBottomSheetRef>(null);
+
+  const [passwordProtected, setPasswordProtected] = useState<boolean | null>(null);
+  const [biometricLoginPossible, setBiometricLogin] = useState<boolean | null>(null);
 
   /**
    * Toast configuration for success and error messages.
@@ -53,21 +56,7 @@ export default function Index() {
     ),
   };
 
-  /**
-   * Fetch stored password and AGB acceptance status on component mount.
-   */
-  useEffect(() => {
-    AsyncStorage.getItem("appPassword").then((val) => {
-      setStoredPassword(val);
-      setIsLoading(false);
-      if (val) attemptBiometricLogin(); // Attempt biometric login if password exists
-    });
-    AsyncStorage.getItem("acceptedAGB").then((val) => {
-      setAgbAccepted(val === "true");
-      setAcceptedAGB(val === "true");
-    });
-  }, []);
-
+  
   /**
    * Initialize the database table on component mount.
    */
@@ -85,19 +74,47 @@ export default function Index() {
     scheduleDailyReminder();
   }, []);
 
+
+
   /**
-   * Initialize the app language based on stored preferences.
+   * Fetch stored password and AGB acceptance status on component mount.
    */
   useEffect(() => {
-    async function initLanguage() {
+    async function fetchData(){
+      const pasword = await AsyncStorage.getItem("password");
+        setStoredPassword(typeof pasword == "string" ? pasword : null);
+      const acceptedAgb = await AsyncStorage.getItem("acceptedAGB");
+        setAcceptedAGB(typeof acceptedAgb == "string" ? acceptedAgb == "true" : false);
       const lang = await AsyncStorage.getItem("language");
-      if (lang) {
-        await i18n.changeLanguage(lang);
+        if (lang) {
+          await i18n.changeLanguage(lang);
+        }
+
+      const onBoardingStep = await AsyncStorage.getItem("onboardingSetp");
+      if (typeof onBoardingStep !== "string") {
+        router.replace("/introduction");
+      } else if (onBoardingStep == "one"){
+        router.replace("/category");
+      } else if (onBoardingStep == "two"){
+        router.replace("/variables");
+      } else if (onBoardingStep == "three"){
+        router.replace("/password");
+      } else if (onBoardingStep == "done") {
+        const passwordProtected = await AsyncStorage.getItem("passwordProtected");
+        const biometricLogin = await AsyncStorage.getItem("biometricLogin");
+        setPasswordProtected(typeof passwordProtected == "string" ? passwordProtected == "true" : null);
+        setBiometricLogin(typeof biometricLogin == "string" ? biometricLogin == "true" : null);
+        if (passwordProtected == "false" && biometricLogin == "false") {
+          router.replace("/home");
+        }
+        setIsLoading(false);
+        if ( typeof biometricLogin == "string" && biometricLogin == "true" ) attemptBiometricLogin(); 
       }
-      return lang || i18n.language;
-    }
-    initLanguage();
+        
+      }   
+      fetchData();
   }, []);
+
 
   /**
    * Show toast messages.
@@ -154,16 +171,9 @@ export default function Index() {
     }
   };
 
-  /**
-   * Parse AGB text from translations.
-   */
-  let agbsRaw = t("login.AGB", { returnObjects: true });
-  let agbs: string[] = Array.isArray(agbsRaw)
-    ? agbsRaw
-    : Object.values(agbsRaw as object).map(String);
 
-  // Show loading state if data is still being fetched
-  if (isLoading) return null;
+
+  
 
   return (
     <View className={`flex-1 px-6 justify-center items-center ${scheme === "dark" ? "bg-neutral-900" : "bg-white"}`}>
@@ -175,11 +185,18 @@ export default function Index() {
       />
 
       {/* Title */}
+      { passwordProtected === true &&
       <Text className={`font-bold text-2xl mb-6 ${scheme === "dark" ? "text-white" : "text-black"}`}>
         {storedPassword ? t("login.enterPasswordTitle") : t("login.setPasswordTitle")}
       </Text>
+      }
+
+      { isLoading &&
+        <ActivityIndicator size="large" color="#0000ff" />
+      }
 
       {/* Password Input */}
+      { passwordProtected === true &&
       <CustomTextInput
         placeholder={t("login.passwordPlaceholder")}
         value={passwordInput}
@@ -187,65 +204,39 @@ export default function Index() {
         aditionalStyles="mb-4 w-full max-w-[250px]"
         secureTextEntry={true}
       />
-
-      {/* AGB Acceptance */}
-      {!agbAccepted && (
-        <View className="flex-row items-center mb-4">
-          <TouchableOpacity
-            onPress={() => { setAcceptedAGB(!acceptedAGB); handleAcceptAGB(); }}
-            className={`mr-2 ${acceptedAGB ? "bg-blue-600" : "bg-gray-300"} rounded-full w-5 h-5 justify-center items-center`}
-          >
-            {acceptedAGB && <Text className="text-white text-xs">✓</Text>}
-          </TouchableOpacity>
-          <Text className={`text-sm ${scheme === "dark" ? "text-gray-400" : "text-gray-700"}`}>
-            {t("login.acceptAGB")}
-          </Text>
-        </View>
-      )}
-
+      }
       {/* Submit Button */}
+      { passwordProtected === true &&
       <CustomButton
         title={storedPassword ? t("login.login") : t("login.savePassword")}
         onPress={handleSubmit}
         aditionalStyles="w-full max-w-[250px]"
-        isDisabled={(!acceptedAGB && !agbAccepted) || !passwordInput}
       />
+      }
 
       {/* Biometric Login */}
-      {storedPassword && (
+      {biometricLoginPossible &&
         <TouchableOpacity onPress={attemptBiometricLogin} className="mt-4">
           <Text className="text-blue-600 dark:text-blue-400">
             {t("login.biometricPrompt")}
           </Text>
         </TouchableOpacity>
-      )}
+      }
 
       {/* Toast Notifications */}
       <Toast config={toastConfig} />
-
-      {/* View AGB */}
-      {!agbAccepted && (
-      <TouchableOpacity
-        onPress={() => bottomSheetRef.current?.openSheet(0)}
-        className="mt-4"
-      >
-        <Text className="text-blue-600 dark:text-blue-400">
-          {t("login.viewAGB")}
-        </Text>
-      </TouchableOpacity>
-      )}
-
-      {/* AGB Bottom Sheet */}
-      
-      <CustomBottomSheet ref={bottomSheetRef}>
-        <View className="p-4">
-          {agbs.map((line: string, index: number) => (
-            <Text key={index} className="text-gray-300 mb-2 font-semibold w-full">
-              {index + 1}. {line}
-            </Text>
-          ))}
-        </View>
-      </CustomBottomSheet>
+      {/*      <CustomButton
+        title={"reset onboarding"}
+        onPress={async () => {
+          await AsyncStorage.removeItem("onboardingSetp");
+          await AsyncStorage.removeItem("acceptedAGB");
+          await AsyncStorage.removeItem("password");
+          await AsyncStorage.removeItem("passwordProtected");
+          await AsyncStorage.removeItem("biometricLogin");
+          router.replace("/introduction");
+        }}
+        aditionalStyles="w-full max-w-[250px] mt-10 bg-red-600"
+      />*/}
     </View>
   );
 }

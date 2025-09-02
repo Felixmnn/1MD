@@ -32,7 +32,7 @@
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
-    "plugins": [
+   "plugins": [
       "expo-router",
       [
         "expo-splash-screen",
@@ -43,7 +43,8 @@
           "backgroundColor": "#111827"
         }
       ],
-      "expo-sqlite"
+      "expo-sqlite",
+      "./removeMediaPermissions.plugin.js"
     ],
     "experiments": {
       "typedRoutes": true

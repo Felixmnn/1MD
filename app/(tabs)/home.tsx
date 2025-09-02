@@ -1,15 +1,19 @@
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
+import { View, Text, ScrollView, TouchableOpacity, Button } from 'react-native'
 import React, { use, useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Icon from 'react-native-vector-icons/FontAwesome5'
-import CustomButton from '@/components/customButton'
+import CustomButton from '@/components/gui/customButton'
 import { addEntry, getEntryForToday } from '@/database/setEntry'
 import { router } from 'expo-router'
 import { isCompleated } from '@/functions/homeCondtions'
-import DiplayAndEditDay from '@/components/diplayAndEditDay'
+import DiplayAndEditDay from '@/components/gui/diplayAndEditDay'
 import Toast, { BaseToast, ToastConfigParams } from 'react-native-toast-message'
 import { useTranslation } from 'react-i18next'
 import { useIsFocused } from '@react-navigation/native'
+import ConfettiCannon from "react-native-confetti-cannon";
+import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry'
+import { getAmountOfEntries } from '@/database/getEntrys'
+import { useGlobalContext } from '@/components/context/GlobalProvider'
 
 /**
  * The Home component is the landing page of the app.
@@ -17,28 +21,10 @@ import { useIsFocused } from '@react-navigation/native'
  */
 const Home = () => { 
 const { t } = useTranslation();
-type todayEntry = {
-  date: string;
-  thingsLearned: string[];
-  productivity: string | null;
-  kcal: number | null;
-  steps: number | null;
-  workout: boolean;
-  workoutDuration: number | null;
-  workoutIntensity: string | null;
-  sleepQuality: string | null; 
-  socialInteractions: number | null;
-  goodSocialInteractions: number | null;
-  badSocialInteractions: number | null;
-  somethingSpecial: string[];
-  overallDayRating: number | null;
-  workHours: number | null;
-  sleepDuration: number | null;
-  socialMediaUsageMorning: boolean | null;
-  socialMediaUsageEvening: boolean | null;
-  avoidedBadHabits: boolean | null;
-};
+const { colorTheme, themeColors } = useGlobalContext();
 
+  const confettiRef = React.useRef<any>(null);
+  
 //This effect fetches the entry for today if there is one
 const isFocused = useIsFocused();
 useEffect(() => {
@@ -254,8 +240,13 @@ type SelectedData = {
       console.log("Things learned wird so gespeichert:", transformedData.thingsLearned)
       await addEntry(transformedData);
       setDataSaved(true);
-      showToast('success', t('home.toast.successTitle'), t('home.toast.successMessage') );
-
+      const amountOfEntrys = await getAmountOfEntries();
+      if (amountOfEntrys == 0 || amountOfEntrys == 9 || amountOfEntrys == 29 || amountOfEntrys == 99 ) {
+        confettiRef.current.start();
+        showToast('success', "Glückwunsch!", "Du hast " + (amountOfEntrys + 1) + " Einträge gemacht!" );
+      } else {
+        showToast('success', t('home.toast.successTitle'), t('home.toast.successMessage') );
+      }
   }
   catch (error) {
     showToast('error', t('home.toast.errorTitle'), t('home.toast.errorMessage'));
@@ -267,7 +258,9 @@ type SelectedData = {
 
     
   return ( 
-    <SafeAreaView edges={['top']} className='flex-1 px-2 bg-gray-900'>
+    <SafeAreaView edges={['top']} className='flex-1 px-2 bg-gray-900'
+
+    >
       <ScrollView className='flex-1 bg-gray-900'>
         <View className='flex-row justify-between items-center mb-2'>
             <CustomButton
@@ -292,14 +285,21 @@ type SelectedData = {
         <View className=' mb-4 mt-2 '>
             <CustomButton
                 title={ isCompleated(selectedData) === "" ? dataSaved? t ('home.updateData') : t ('home.saveData') : `${t('home.missingData')} (${isCompleated(selectedData).length > 15 ? isCompleated(selectedData).slice(0, 15) + '...' : isCompleated(selectedData)})`}
-                onPress={async() => { await  makeEntry(selectedData)}}
+                onPress={async() => { await  makeEntry(selectedData); 
+                }}
                 isDisabled={isCompleated(selectedData) !== ""}
                 aditionalStyles={`mb-4 w-full px-2 ${isCompleated(selectedData) !== "" ? "opacity-50" : ""}`}
             />
         </View>
       </ScrollView>
       <Toast config={toastConfig} />
-
+      <ConfettiCannon
+  ref={confettiRef}
+  count={100}
+  origin={{ x: 200, y: -20 }} // z.B. Mitte oben
+  autoStart={false}
+  fadeOut={true}
+/>
     </SafeAreaView>
   )
 }

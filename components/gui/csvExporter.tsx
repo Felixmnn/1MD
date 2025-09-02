@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 import CustomButton from './customButton';
 import { getAndTransformallEntries } from '@/database/setEntry';
+import { useGlobalContext } from '../context/GlobalProvider';
 
 /**
  * Props for the CsvExportScreen Component
@@ -71,10 +72,12 @@ const CsvExportScreen: React.FC<CsvExportScreenProps> = ({
   handleToast = () => {},
 }) => {
   const { t } = useTranslation();
+  const { colorTheme } = useGlobalContext();
 
   return (
     <CustomButton
       title={t('csvExport.exportButton')} // Localized button title
+      backgroundColor={colorTheme === "LightBlue" ? '#138bacff' : '#0c1f44ff'}
       aditionalStyles="flex-1 m-1" // Additional styles for the button
       onPress={() => handleExportCSV(handleToast, t)} // Trigger CSV export on button press
     />

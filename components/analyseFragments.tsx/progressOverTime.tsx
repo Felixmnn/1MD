@@ -1,8 +1,8 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import CustomDateRangeSlider from '../customRangeSlider';
-import { CustomBottomSheetRef } from '../customBottomSheet';
+import CustomDateRangeSlider from '../gui/customRangeSlider';
+import { CustomBottomSheetRef } from '../gui/customBottomSheet';
 
 /**
  * Type Definitions

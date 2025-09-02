@@ -2,8 +2,8 @@ import { View, Text, ScrollView, Dimensions, FlatList, Animated, TouchableOpacit
 import React, { use, useEffect, useRef, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { getDataForVariable } from '@/database/getEntrys'
-import CustomButton from '@/components/customButton'
-import CustomBottomSheet, { CustomBottomSheetRef } from '@/components/customBottomSheet';
+import CustomButton from '@/components/gui/customButton'
+import CustomBottomSheet, { CustomBottomSheetRef } from '@/components/gui/customBottomSheet';
 import Heatmap from '@/components/charts/heatmap'
 import CustomLineChart from '@/components/charts/lineChart'
 import CustomBarChart from '@/components/charts/barChart'

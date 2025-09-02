@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { View, Text, Modal } from "react-native";
 import * as LocalAuthentication from "expo-local-authentication";
-import CustomTextInput from "./customTextInput";
+import CustomTextInput from "./gui/customTextInput";
 import Toast, { BaseToast, ToastConfigParams } from "react-native-toast-message";
 import { useTranslation } from "react-i18next";
-import CustomButton from "./customButton";
+import CustomButton from "./gui/customButton";
 
 /**
  * Props for the ResetPasswordModal Component

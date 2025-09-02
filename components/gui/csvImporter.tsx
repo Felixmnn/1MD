@@ -6,6 +6,7 @@ import CustomButton from './customButton';
 import { addEntry } from '@/database/setEntry';
 import { useTranslation } from 'react-i18next';
 import { router } from 'expo-router';
+import { useGlobalContext } from '../context/GlobalProvider';
 
 /**
  * Props for the CsvImportScreen Component
@@ -24,6 +25,7 @@ const CsvImportScreen: React.FC<CsvImportScreenProps> = ({
   handleToast = () => {},
 }) => {
   const { t } = useTranslation();
+  const { colorTheme } = useGlobalContext();
 
   /**
    * handleImportCSV Function
@@ -134,6 +136,7 @@ const CsvImportScreen: React.FC<CsvImportScreenProps> = ({
     <CustomButton
       title={t('csvImport.importButton')} // Localized button title
       aditionalStyles="flex-1 m-1" // Additional styles for the button
+      backgroundColor={colorTheme === "LightBlue" ? '#138bacff' : '#0c1f44ff'}
       onPress={async () => {
         await handleImportCSV(); // Trigger the CSV import process on button press
       }}

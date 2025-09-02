@@ -2,12 +2,13 @@ import { View, Text } from 'react-native';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import CustomTextInput from './customTextInput';
+import CustomTextInput from '../gui/customTextInput';
 import SmileyScale from './smileyScale';
 import RatingAspect from './ratingAspect';
-import DynamicTexinputArray from './dynamicTextinputArray';
+import DynamicTexinputArray from '../gui/dynamicTextinputArray';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { isCompleated, workConditions, physicalHealthConditions, mentalHealthConditions } from '@/functions/homeCondtions';
+import { useGlobalContext } from '../context/GlobalProvider';
 
 /**
  * Props for the DiplayAndEditDay Component
@@ -37,7 +38,7 @@ const DiplayAndEditDay: React.FC<Props> = ({
   validEnumValues,
 }) => {
   const { t } = useTranslation();
-
+  const { themeColors, colorTheme } = useGlobalContext();
   // Labels and section titles from translations
   const labels = t('displayAndEditData.fields', { returnObjects: true }) as {
     [key: string]: { label: string; placeholder?: string };

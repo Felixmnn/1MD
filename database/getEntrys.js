@@ -89,3 +89,8 @@ export async function getDataForVariable(table, columnName) {
         return [];
     }
 }
+
+export async function getAmountOfEntries() {
+        const res = await db.getAllAsync(`SELECT ${columnName}, date FROM ${table}`);
+        return res.length;
+}
