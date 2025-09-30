@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Dimensions } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
+import { useGlobalContext } from '../context/GlobalProvider';
 
 /**
  * Props for the CustomLineChart Component
@@ -21,6 +22,7 @@ const CustomLineChart = ({
   chartData,
   endDate = new Date(),
 }: CustomLineChartProps) => {
+  const { themeColors, colorTheme } = useGlobalContext();
   const currentDate = new Date();
   const currentWeekdayIndex = currentDate.getDay();
   const months = ['JAN', 'FEB', 'MÄR', 'APR', 'MAI', 'JUN', 'JUL', 'AUG', 'SEP', 'OKT', 'NOV', 'DEZ'];
@@ -244,10 +246,10 @@ const CustomLineChart = ({
             verticalLabelRotation={20}
             formatYLabel={(y) => `${parseFloat(y).toFixed(decimalPlaces)}`}
             chartConfig={{
-              backgroundGradientFrom: '#0c1f44ff',
-              backgroundGradientTo: '#0c1f44ff',
+              backgroundGradientFrom: themeColors[colorTheme].button,
+              backgroundGradientTo: themeColors[colorTheme].button,
               decimalPlaces: decimalPlaces,
-              color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+              color: (opacity = 1) => themeColors[colorTheme].inaktivText,
               labelColor: () => '#fff',
               propsForDots: {
                 r: '5',

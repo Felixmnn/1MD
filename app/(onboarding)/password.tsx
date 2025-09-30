@@ -8,10 +8,13 @@ import CustomTextInput from '@/components/gui/customTextInput';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomBottomSheet, { CustomBottomSheetRef } from '@/components/gui/customBottomSheet';
 import { useTranslation } from 'react-i18next';
+import { useGlobalContext } from '@/components/context/GlobalProvider';
 
 const Password = () => {
   const { t } = useTranslation();
-  
+    const { colorTheme, setColorTheme, themeColors } = useGlobalContext();
+
+
   const [ hereToEdit, setHereToEdit ] = React.useState(false);
 
   const [ passwordYesNo, setPasswordYesNo ] = React.useState<boolean | null>(null);
@@ -58,7 +61,7 @@ const Password = () => {
               {state == true && <Text className="text-white text-xs">✓</Text>}
             </TouchableOpacity>
             <Text className={`text-lg ${state == true ? "text-white" : "text-gray-400"}`}>
-              Ja
+              {t("profile.password.yes")}
             </Text>
           </View>
           <View className='flex-row items-center mr-2'>
@@ -69,7 +72,7 @@ const Password = () => {
               {state == false && <Text className="text-white text-xs">✓</Text>}
             </TouchableOpacity>
             <Text className={`text-lg ${state == false ? "text-white" : "text-gray-400"}`}>
-              Ne
+              {t("profile.password.no")}
             </Text>
           </View>
         </View>
@@ -78,17 +81,27 @@ const Password = () => {
   }
   
   return (
-    <SafeAreaView className='flex-1 w-full justify-between items-center bg-gray-900 p-4'>
-      <View className='flex-1 justify-start items-center w-full '>
+    <SafeAreaView className='flex-1 w-full items-center  p-4'
+     style={{
+         backgroundColor: themeColors[colorTheme].background
+      }}
+    >
+      <View className='w-full justify-start items-center w-full rounded-lg' 
+        style={{
+          backgroundColor:themeColors[colorTheme].button,
+          padding: 20,
+          marginBottom: 10
+        }}
+      >
       <Text className='text-3xl font-bold text-white mb-6 text-center'>
-        Password Protection
+        {t("profile.password.passwordProtection")}
       </Text>
 
 
       {/* Password Settings */}
       <YesNoComponent
-        title={"Passwortschutz: "}
-        state={passwordYesNo}
+        title={t("profile.password.passwordProtection1")}
+        state={passwordYesNo === null ? undefined : passwordYesNo}
         setState={setPasswordYesNo}
       />
 
@@ -96,14 +109,14 @@ const Password = () => {
         passwordResetRequested == true &&
         <View className='w-full'>
           <CustomTextInput
-            placeholder={"Altes Passwort"}
+            placeholder={t("profile.password.oldPassword")}
             value={password}
             setValue={setPassword}
             aditionalStyles="mb-4 w-full "
             secureTextEntry={true}
           />
           <CustomTextInput 
-            placeholder={"Neues Passwort"}
+            placeholder={t("profile.password.newPassword")}
             value={passwordConfirm}
             setValue={setPasswordConfirm}
             aditionalStyles="mb-4 w-full "
@@ -114,7 +127,13 @@ const Password = () => {
 
       { hereToEdit === true && passwordSet === true &&
       <CustomButton
-        title={ passwordResetRequested == false ? "Passwort ändern" :  password != passwordConfirm ? "Passwörter stimmen nicht überein" : password.length < 4 ? "Passwort zu kurz" : "Neues Passwort speichern" }
+        title={ passwordResetRequested == false ? t("profile.password.changeButton")
+          :  password != passwordConfirm ? 
+          t("profile.password.passwordsDontMatch")
+          : password.length < 4 ? 
+          t("profile.password.passwordTooShort"):
+          t("profile.password.saveNewPassword") 
+        }
         aditionalStyles='w-full mb-4'
         onPress={async() => {
           if (passwordResetRequested == false) {
@@ -134,7 +153,7 @@ const Password = () => {
       {passwordYesNo !== null && (passwordSet === true || passwordYesNo == false ) &&
       <YesNoComponent 
         title={"Biometrische Anmeldung: "}
-        state={biometricYesNo}
+        state={biometricYesNo === null ? undefined : biometricYesNo}
         setState={setBiometricYesNo}
       />
       }
@@ -144,31 +163,24 @@ const Password = () => {
 
 
 
-      { passwordSet === false &&
-      <YesNoComponent 
-        title="Möchtest du dein Tagebuch mit einem Passwort schützen?"
-        state={passwordYesNo}
-        setState={setPasswordYesNo}
-      />
-      }
       {  passwordYesNo !== null && passwordSet === false && passwordYesNo === true &&
       <View className='w-full px-2'>
         <CustomTextInput
-          placeholder={"Passwort festlegen"}
+          placeholder={t("profile.password.setPassword")}
           value={password}
           setValue={setPassword}
           aditionalStyles="mb-4 w-full "
           secureTextEntry={true}
         />
         <CustomTextInput
-          placeholder={"Passwort bestätigen"}
+          placeholder={t("profile.password.confirmPassword")}
           value={passwordConfirm}
           setValue={setPasswordConfirm}
           aditionalStyles="mb-4 w-full "
           secureTextEntry={true}
         />
         <CustomButton
-          title="Passwort festlegen"
+          title={t("profile.password.setPassword")}
           onPress={async() => {
             await AsyncStorage.setItem("password", password);
             setPasswordSet(true);
@@ -213,7 +225,7 @@ const Password = () => {
         {
           hereToEdit === true &&
         <CustomButton 
-          title="Änderungen speichern"
+          title={t("profile.password.saveChanges")}
           aditionalStyles='w-full mb-2'
           onPress={async() => {
             await AsyncStorage.setItem("passwordProtected", passwordYesNo ? "true" : "false");
@@ -225,7 +237,7 @@ const Password = () => {
         {
         (passwordYesNo !== null && biometricYesNo !== null) && (passwordSet === true || passwordYesNo == false ) && !hereToEdit &&
         <CustomButton
-          title="Lets go"
+          title={t("profile.password.letsGo")}
           aditionalStyles='w-full '
           onPress={async() => {
             await AsyncStorage.setItem("passwordProtected", passwordYesNo ? "true" : "false");

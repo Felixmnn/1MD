@@ -1,6 +1,7 @@
 import { View, Text, useWindowDimensions } from 'react-native';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useGlobalContext } from '../context/GlobalProvider';
 
 /**
  * Props for the Heatmap Component

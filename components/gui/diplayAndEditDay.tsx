@@ -49,20 +49,21 @@ const DiplayAndEditDay: React.FC<Props> = ({
     mentalHealth: string;
   };
 
+  
   return (
     <View>
       {/* Work Section */}
       <View
-        className={`px-2 mb-4 ${
+        className={`px-2 mb-4 rounded-lg py-2 ${
           selectedData.workHours !== null && selectedData.productivity !== null
-            ? 'rounded-[10px] py-2 bg-blue-900'
-            : ''
+            ? 'rounded-[10px]  bg-blue-900'
+            : 'rounded-[10px] '
         }`}
         style={{
           backgroundColor:
             selectedData.workHours !== null && selectedData.productivity
-              ? '#0c1f44ff'
-              : undefined,
+              ? themeColors[colorTheme].button
+              : themeColors[colorTheme].buttonBackground,
         }}
       >
         <Text className="text-white text-lg font-bold text-[18px] mb-2">
@@ -82,6 +83,7 @@ const DiplayAndEditDay: React.FC<Props> = ({
               })
             }
             aditionalStyles="mb-2 flex-1 mr-2"
+            
           />
           {/* Productivity Rating */}
           <RatingAspect
@@ -109,15 +111,15 @@ const DiplayAndEditDay: React.FC<Props> = ({
 
       {/* Physical Health Section */}
       <View
-        className={`px-2 mb-4 ${
+        className={`px-2 mb-4 py-2 rounded-lg ${
           physicalHealthConditions(selectedData)
-            ? 'rounded-lg py-2 bg-blue-900'
-            : ''
+            ? '  bg-blue-900'
+            : ' '
         }`}
         style={{
           backgroundColor: physicalHealthConditions(selectedData)
-            ? '#0c1f44ff'
-            : undefined,
+            ? themeColors[colorTheme].button
+            : themeColors[colorTheme].buttonBackground,
         }}
       >
         <Text className="text-white text-lg font-bold text-[18px] mb-2">
@@ -234,15 +236,15 @@ const DiplayAndEditDay: React.FC<Props> = ({
 
       {/* Mental Health Section */}
       <View
-        className={`px-2 mb-4 ${
+        className={`px-2 mb-4 py-2 rounded-lg ${
           mentalHealthConditions(selectedData)
             ? 'rounded-[10px] py-2 bg-blue-900'
             : ''
         }`}
-        style={{
+       style={{
           backgroundColor: mentalHealthConditions(selectedData)
-            ? '#0c1f44ff'
-            : undefined,
+            ? themeColors[colorTheme].button
+            : themeColors[colorTheme].buttonBackground,
         }}
       >
         <Text className="text-white text-lg font-bold text-[18px] mb-2">
@@ -373,14 +375,16 @@ const DiplayAndEditDay: React.FC<Props> = ({
 
       {/* Overall Day Rating */}
       <View
-        className={`px-2 mb-2 ${
+        className={`px-2 mb-4 py-2 rounded-lg ${
           selectedData.overallDayRating !== null
             ? 'rounded-[10px] py-2 bg-blue-900'
             : ''
         }`}
         style={{
           backgroundColor:
-            selectedData.overallDayRating !== null ? '#0c1f44ff' : undefined,
+            selectedData.overallDayRating !== null 
+            ? themeColors[colorTheme].button
+            : themeColors[colorTheme].buttonBackground,
         }}
       >
         <Text className="text-white text-xl font-bold text-[18px] mb-2">

@@ -51,7 +51,21 @@
       "changeButton": "Change Password",
       "successTitle": "Password Changed",
       "successMessage": "Your password has been successfully changed.",
-      "errorTitle": "Error"
+      "errorTitle": "Error",
+      "yes": "Yes",
+      "no": "No",
+      "passwordProtection": "Password Protection",
+      "passwordProtection1": "Password Protection: ",
+      "oldPassword":"Old Password",
+      "newPassword":"New Password",
+      "setPassword": "Set Password",
+      "confirmPassword": "Confirm Password",
+      "letsGo": "Let's go",
+      "saveChange": "Save Changes",
+      "passwordsDontMatch": "Passwords do not match.",
+      "passwordToShort": "Password too short.",
+      "saveNewPassword": "Save New Password"
+
     },
     "agb": {
       "sectionTitle": "Terms and Conditions (T&C)",
@@ -475,7 +489,9 @@
   "hypothesisDescription": "With at least 10 entries, you can see a hypothesis about the relationship between {{varAName}} and {{varBName}} here.",
   
   "recommendationTitle": "Recommendation",
-  "recommendationDescription": "Here you will find a recommendation on how you can optimize {{varAName}} or {{varBName}}."
+  "recommendationDescription": "Here you will find a recommendation on how you can optimize {{varAName}} or {{varBName}}.",
+  "almostThere": "Almost there! "
+
 }
 ,
   "categories": {
@@ -522,7 +538,18 @@
     "recommendationIncrease": "If you do {{labelA}}, the likelihood of {{labelB}} increases by {{diffPercent}}%.",
     "recommendationDecrease": "If you do {{labelA}}, the likelihood of {{labelB}} decreases by {{diffPercent}}%."
   
-}
+},"variableSelection": {
+    "wichDataWouldYouLikeToTrack": "Which data would you like to track?",
+
+    "youCanChangeThisLater": "You can change this later in the profile settings.",
+    "soundsGoodContinue": "Sounds good, continue",
+    "selectionChoices": "📊 = Selection option (e.g. mood)",
+"numberChoices": "🔢 = Numerical value (e.g. sleep duration in hours)",
+"boolChoices": "🔀 = Yes/No (e.g. did exercise)",
+"textChoices": "📋 = Text entries (e.g. activities)",
+    "edit": "Edit",
+    "done": "Done"
+  }
 
 }
 

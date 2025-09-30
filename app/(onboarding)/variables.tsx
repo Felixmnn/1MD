@@ -10,8 +10,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import CustomBottomSheet, { CustomBottomSheetRef } from '@/components/gui/customBottomSheet'
 import PillButton from '@/components/onboarding/pillButton'
 import CustomButton from '@/components/gui/customButton'
+import { useGlobalContext } from '@/components/context/GlobalProvider'
+import { useTranslation } from 'react-i18next'
 
 const variables = () => {
+      const { themeColors, colorTheme } = useGlobalContext();
+    const {t} = useTranslation()
     const { Kategory } = useLocalSearchParams();
     const [ editingVariables, setEditingVariables ] = React.useState(false);
     const [ selectedKategory, setSelectedKategory ] = React.useState(Kategory || "Casual");
@@ -53,19 +57,17 @@ const variables = () => {
 
 
     const emojisAndMeaning = [ 
-        "📊 = Auswahlmöglichkeit (z.B. Stimmung)",
-        "🔢 = Numerischer Wert (z.B. Schlafdauer in Stunden)",
-        "🔀 = Ja/Nein (z.B. Sport gemacht)",
-        "📋 = Texteinträge (z.B. Aktivitäten)"
+        t("variableSelection.selectionChoices"),
+        t("variableSelection.numberChoices"),
+        t("variableSelection.boolChoices"),
     ]
     const typeToIcon = {
         "enum": "📊",
         "number": "🔢"
         ,"bool": "🔀",
-        "array": "📋"
     }
-    const typen = ["📊", "🔢", "🔀", "📋"];
-    const [ selectedTypes, setSelectedTypes ] = React.useState<string[]>(["📊", "🔢", "🔀", "📋"]);
+    const typen = ["📊", "🔢", "🔀"];
+    const [ selectedTypes, setSelectedTypes ] = React.useState<string[]>(["📊", "🔢", "🔀"]);
 
     const T = ({title="", selected=[], setSelected=()=> {} }) => {
         return (
@@ -93,13 +95,24 @@ const variables = () => {
     }
   
   return (
-    <SafeAreaView className='flex-1 justify-start bg-gray-900'>
-        <Text className='text-2xl font-bold text-center text-white mx-2'>
-            Welche Daten möchtest du tracken?
-        </Text>
-        <Text className='text-gray-100 px-2 text-center mb-2'>
-            Diese kannst du später jederzeit anpassen wir empfehlen dir aber zu beginn nicht zu viele auszuwählen.
-        </Text>
+    <SafeAreaView className='flex-1 justify-start bg-gray-900'
+        style={{
+            backgroundColor: themeColors[colorTheme].background
+        }}
+    >
+        <View className='rounded-lg m-2 p-2'
+            style={{
+                backgroundColor: themeColors[colorTheme].button
+            }}
+        >
+            <Text className='text-2xl font-bold text-center text-white mx-2'>
+                {t("variableSelection.wichDataWouldYouLikeToTrack")}
+            </Text>
+            <Text className='text-gray-100 px-2 text-center mb-2'>
+                {t("variableSelection.youCanChangeThisLater")}
+            </Text>
+        </View>
+
         <View className="flex-1">
         <FlatList
             data={keys}
@@ -132,7 +145,7 @@ const variables = () => {
                 />
             )}/>
             <LinearGradient
-                colors={["#111827", "transparent"]}
+                colors={[themeColors[colorTheme].background, "transparent"]}
                 style={{
                     position: "absolute",
                     top: 0,
@@ -158,7 +171,7 @@ const variables = () => {
             </View>
             <View className='p-4'>
                 <CustomButton
-                    title="Klingt gut, weiter!"
+                    title={t("variableSelection.soundsGoodContinue")}
                     onPress={async () => {
                         if (editingVariables) {
                             await AsyncStorage.setItem("selectedVariables", JSON.stringify(selectedVariables));

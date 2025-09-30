@@ -3,6 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { correlation, countOutliers, linearRegression, mean, median, minMax } from '@/functions/mathFunctions';
 import { returnHypothesisColor } from '@/functions/returnColors';
+import { useGlobalContext } from '../context/GlobalProvider';
 
 
 type NumberNumberProps = {
@@ -23,6 +24,7 @@ export default function NumberNumber({
   idB,
 }: NumberNumberProps) {
   const { t } = useTranslation();
+    const { colorTheme, themeColors } = useGlobalContext();
   
     // --- Statistik ---
     const r =  correlation(variableA, variableB);
@@ -139,7 +141,7 @@ export default function NumberNumber({
   return (
     <View className="w-full h-full space-y-4">
       {/* 2. Hypothese */}
-      <View className="rounded-md p-4 mt-2" style={{ backgroundColor: '#0c1f44ff' }}>
+      <View className="rounded-md p-4 mt-2" style={{ backgroundColor: themeColors[colorTheme].button }}>
         <Text className="font-bold text-gray-200 text-lg mb-2">{t('boolNumber.hypothesisTitle')}</Text>
         <Text className="text-gray-200">{statements[0]}</Text>
       </View>

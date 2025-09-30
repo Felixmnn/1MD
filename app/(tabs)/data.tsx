@@ -14,6 +14,8 @@ import CustomButton from '@/components/gui/customButton';
 import { useTranslation } from 'react-i18next';
 import { useIsFocused } from '@react-navigation/native';
 import { router } from 'expo-router';
+import { useGlobalContext } from '@/components/context/GlobalProvider';
+import { LinearGradient } from 'expo-linear-gradient';
 
 /**
  * The Data component is the page where users can view and edit past diary entries.
@@ -90,7 +92,7 @@ const Data = () => {
     avoidedBadHabits: null,
   });
   const [pastEntries, setPastEntries] = useState<DiaryEntry[]>([]);
-  
+  const { colorTheme, themeColors } = useGlobalContext();
   //Config for the Toast messages
   const toastConfig = {
     success: (props: ToastConfigParams<any>) => (
@@ -289,7 +291,11 @@ const Data = () => {
     }}
 
   return (
-    <SafeAreaView  edges={['top']} className="flex-1   bg-gray-900">
+    <SafeAreaView  edges={['top']} className="flex-1   bg-gray-900"
+      style={{
+         backgroundColor: themeColors[colorTheme].background
+      }}
+    >
       <CustomTextInput
         placeholder={t('data.filterPlaceholder')}
         value={filterDay}
@@ -298,14 +304,15 @@ const Data = () => {
         aditionalStyles=' my-2 mx-2'
         dateInput={true}
       />
+      <View className='flex-1'>
       <FlatList
         data={pastEntries.filter(item => item.date.includes(filterDay))}
         keyExtractor={(item) => item.date}
         numColumns={numColumns}
-        style={{ marginHorizontal: 4}}
+        style={{ marginHorizontal: 4, paddingHorizontal: 5}}
         ListEmptyComponent={
           <View className="flex-1 items-center justify-center py-10 m-2 rounded-lg"
-            style={{ backgroundColor: '#0c1f44ff' }}
+            style={{ backgroundColor: themeColors[colorTheme].button }}
           >
             <Icon
               name="calendar"
@@ -338,6 +345,31 @@ const Data = () => {
           </TouchableOpacity>
         )}
       /> 
+      <LinearGradient
+                colors={[themeColors[colorTheme].background, "transparent"]}
+                style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: 10, // Höhe des Fades
+                }}
+                pointerEvents="none" // verhindert, dass Touches blockiert werden
+            />
+
+        {/* Bottom Gradient */}
+        <LinearGradient
+            colors={["transparent",themeColors[colorTheme].background]}
+            style={{
+                position: "absolute",
+                bottom: 0,
+                left: 0,
+                right: 0,
+                height: 10,
+            }}
+            pointerEvents="none"
+        />
+      </View>
       <View className="flex-row w-full justify-between p-2">
         <CsvImportScreen />
         <CsvExportScreen />

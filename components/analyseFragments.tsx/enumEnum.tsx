@@ -3,6 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { correlation, countOutliers, linearRegression, mean, median, minMax } from '@/functions/mathFunctions';
 import { returnHypothesisColor } from '@/functions/returnColors';
+import { useGlobalContext } from '../context/GlobalProvider';
 
 type EnumEnumProps = {
   variableA?: number[];
@@ -26,11 +27,12 @@ export default function EnumEnum({
   isEnumBool = false,
 }: EnumEnumProps) {
   const { t } = useTranslation();
+  const { colorTheme, themeColors } = useGlobalContext();
 
 
 if (variableA.length !== variableB.length || variableA.length === 0) {
   return (
-    <View className="w-full h-full mt-2 rounded-lg items-center justify-center" style={{ backgroundColor: '#0c1f44ff' }}>
+    <View className="w-full h-full mt-2 rounded-lg items-center justify-center" style={{ backgroundColor: themeColors[colorTheme].button }}>
       <Text style={{ color: '#facc15' }}>{t('enumEnum.errorInvalidData')}</Text>
     </View>
   );
@@ -212,13 +214,13 @@ if (variableA.length !== variableB.length || variableA.length === 0) {
   return (
     <View className="w-full h-full space-y-4">
       {/* Selected Field Section */}
-      <View className="rounded-md p-4 mt-2" style={{ backgroundColor: '#0c1f44ff' }}>
+      <View className="rounded-md p-4 mt-2" style={{ backgroundColor: themeColors[colorTheme].button }}>
         <Text className="font-bold text-gray-200 text-lg mb-2">✅ {t('enumEnum.selectedTitle')}</Text>
         <Text className="text-gray-200">{selectedText}</Text>
       </View>
 
       {/* Statistics Section */}
-      <View className="rounded-md p-4 mt-2" style={{ backgroundColor: '#0c1f44ff' }}>
+      <View className="rounded-md p-4 mt-2" style={{ backgroundColor: themeColors[colorTheme].button }}>
         <Text className="font-bold text-gray-200 text-lg mb-2">{t('enumEnum.hypothesisTitle')}</Text>
         <Text className="text-gray-200">{isEnumBool ? eBS[0] : eS[0]}</Text>
       </View>

@@ -1,6 +1,8 @@
 import { View, Text } from 'react-native';
 import React, { useRef, useState, forwardRef, useImperativeHandle } from 'react';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import { useGlobalContext } from '../context/GlobalProvider';
+import { LinearGradient } from 'expo-linear-gradient';
 
 /**
  * Props for the CustomBottomSheet Component
@@ -27,6 +29,7 @@ export type CustomBottomSheetRef = {
  */
 const CustomBottomSheet = forwardRef<CustomBottomSheetRef, CustomBottomSheetProps>(
   ({ children }, ref) => {
+    const { colorTheme, themeColors } = useGlobalContext();
     // Reference to the BottomSheet instance
     const sheetRef = useRef<BottomSheet>(null);
 
@@ -54,19 +57,21 @@ const CustomBottomSheet = forwardRef<CustomBottomSheetRef, CustomBottomSheetProp
         snapPoints={snapPoints} // Define snap points
         enablePanDownToClose={true} // Allow closing by swiping down
         handleIndicatorStyle={{ backgroundColor: '#fff' }} // Style for the drag indicator
-        backgroundStyle={{ backgroundColor: '#292d36ff' }} // Background color of the sheet
+        backgroundStyle={{ backgroundColor: themeColors[colorTheme].inaktivText }} // Background color of the sheet
       >
         {/* Scrollable content inside the bottom sheet */}
         <BottomSheetScrollView
           contentContainerStyle={{
-            backgroundColor: '#111827',
+            backgroundColor: themeColors[colorTheme].button,  
             paddingBottom: 40,
           }}
-          style={{ backgroundColor: '#111827' }}
+          style={{ backgroundColor: themeColors[colorTheme].button }}
           className="bg-gray-900 p-2"
           showsVerticalScrollIndicator={false} // Hide vertical scroll indicator
         >
+          
           {children}
+          
         </BottomSheetScrollView>
       </BottomSheet>
     );

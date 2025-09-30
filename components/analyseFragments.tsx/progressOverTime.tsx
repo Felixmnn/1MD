@@ -3,6 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import CustomDateRangeSlider from '../gui/customRangeSlider';
 import { CustomBottomSheetRef } from '../gui/customBottomSheet';
+import { useGlobalContext } from '../context/GlobalProvider';
 
 /**
  * Type Definitions
@@ -35,6 +36,7 @@ const ProgressOverTime = ({
   setFilteredData,
 }: ProgressOverTimeProps) => {
   const { t } = useTranslation();
+  const { colorTheme, themeColors } = useGlobalContext();
 
   /**
    * Interface for individual data items in `rawData` and `filteredData`.
@@ -76,7 +78,7 @@ const ProgressOverTime = ({
       {/* Info Box */}
       <TouchableOpacity
         className="bg-white/10 p-4 rounded-xl w-full mt-2"
-        style={{ backgroundColor: '#0c1f44ff' }}
+        style={{ backgroundColor: themeColors[colorTheme].button }}
         onPress={() => bottomSheetRef.current?.openSheet(0)}
       >
         <Text className="text-white text-base font-semibold">
@@ -93,7 +95,7 @@ const ProgressOverTime = ({
       </TouchableOpacity>
 
       {/* Statistics Box */}
-      <View className="bg-white/10 p-4 rounded-xl w-full mt-2" style={{ backgroundColor: '#0c1f44ff' }}>
+      <View className="bg-white/10 p-4 rounded-xl w-full mt-2" style={{ backgroundColor: themeColors[colorTheme].button }}>
         <Text className="text-white text-base font-semibold">
           {t('progressOverTime.averageLabel')}
           <Text className="font-normal">
@@ -121,7 +123,7 @@ const ProgressOverTime = ({
       </View>
 
       {/* Slider Section */}
-      <View className="bg-white/10 p-4 rounded-xl w-full mt-2" style={{ backgroundColor: '#0c1f44ff' }}>
+      <View className="bg-white/10 p-4 rounded-xl w-full mt-2" style={{ backgroundColor: themeColors[colorTheme].button}}>
         <Text className="text-white text-lg font-semibold">{t('progressOverTime.changeTimeframe')}</Text>
         <CustomDateRangeSlider
           endDate={

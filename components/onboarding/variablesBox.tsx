@@ -2,6 +2,8 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { LinearGradient } from 'expo-linear-gradient';
 import PillButton from './pillButton';
+import { useGlobalContext } from '../context/GlobalProvider';
+import { useTranslation } from 'react-i18next';
 
 
 type VariableItem = {
@@ -32,13 +34,15 @@ const VariablesBox = ({
     }) => {
 
     const [collapsed, setCollapsed] = React.useState(false);
-    
-    
+    const {t} = useTranslation()
+      const { themeColors, colorTheme } = useGlobalContext();
 
   return (
     <TouchableOpacity className='w-full px-2 mb-2' onPress={onPressMore}>
       <LinearGradient
-            colors={["#1f2641ff", "#07214dff"]} // dunkelblauer Verlauf
+            colors={[themeColors[colorTheme].buttonBackground, themeColors[colorTheme].button
+
+            ]} // dunkelblauer Verlauf
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 1 }}
             style={{
@@ -47,7 +51,7 @@ const VariablesBox = ({
                 borderRadius: 12,
                 justifyContent: 'center',
                 borderWidth: 1,
-                borderColor: '#12116bff',
+                borderColor: themeColors[colorTheme].button,
             }}
         >
           <View className='flex-row justify-between items-center '
@@ -58,12 +62,23 @@ const VariablesBox = ({
         <Text className='text-2xl font-bold text-white'>{title}</Text>
         {
             done ?
-            <TouchableOpacity onPress={onPressDone} className='bg-gray-700 px-3 py-1 rounded-full'>
-                <Text className='text-white font-semibold'>Edit</Text>
+            <TouchableOpacity onPress={onPressDone} className='bg-gray-700 px-3 py-1 rounded-full'
+              style={{
+                backgroundColor: themeColors[colorTheme].done
+              }}
+            >
+                <Text className='text-white font-semibold'>
+                  {t("variableSelection.edit")}</Text>
             </TouchableOpacity>
             : 
-            <TouchableOpacity onPress={onPressDone} className='bg-gray-700 px-3 py-1 rounded-full'>
-                <Text className='text-white font-semibold'>Fertig</Text>
+            <TouchableOpacity onPress={onPressDone} className='bg-gray-700 px-3 py-1 rounded-full'
+            style={{
+                backgroundColor: themeColors[colorTheme].done
+              }}
+            >
+                <Text className='text-white font-semibold'>{
+                  t("variableSelection.done")}
+                </Text>
             </TouchableOpacity>
         }
         </View>
@@ -77,8 +92,9 @@ const VariablesBox = ({
                         onPress={() => onPressItem(variable)}
                         small={true}
                         type={variable.type}
-                        color1="#07214dff"
-                        color2="#1f2641ff"
+                        color1={themeColors[colorTheme].button}
+                        color2={themeColors[colorTheme].buttonBackground}
+                        borderColor={themeColors[colorTheme].button}
                     />
                  ))
                 }

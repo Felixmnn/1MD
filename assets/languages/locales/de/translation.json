@@ -52,7 +52,20 @@
       "changeButton": "Passwort ändern",
       "successTitle": "Passwort geändert",
       "successMessage": "Dein Passwort wurde erfolgreich geändert.",
-      "errorTitle": "Fehler"
+      "errorTitle": "Fehler",
+      "yes": "Ja",
+      "no": "Nein",
+      "passwordProtection": "Passwortschutz",
+      "passwordProtection1": "Passwortschutz: ",
+      "oldPassword":"Altes Passwort",
+      "newPassword":"Neues Passwort",
+      "setPassword":"Passwort festlegen",
+      "confirmPassword":"Passwort bestätigen",
+      "letsGo":"Los geht's",
+      "saveChanges":"Änderungen speichern",
+      "passwordsDontMatch":"Passwörter stimmen nicht überein",
+      "passwordTooShort":"Passwort zu kurz",
+      "saveNewPassword":"Neues Passwort speichern"
     },
     "agb": {
       "sectionTitle": "Allgemeine Geschäftsbedingungen (AGB)",
@@ -453,8 +466,9 @@
     "hypothesisDescription": "Ab 10 Einträgen kannst du hier eine Hypothese zum Zusammenhang zwischen {{varAName}} und {{varBName}} sehen.",
     
     "recommendationTitle": "Empfehlung",
-    "recommendationDescription": "Hier steht dann eine Empfehlung, wie du die {{varAName}} oder {{varBName}} optimieren kannst."
-  
+    "recommendationDescription": "Hier steht dann eine Empfehlung, wie du die {{varAName}} oder {{varBName}} optimieren kannst.",
+    "almostThere": "Fast geschafft!"
+    
 
 
   },"categories": {
@@ -501,6 +515,17 @@
     "recommendationNone": "\n⚠️ Keine klare Empfehlung möglich.",
     "recommendationIncrease": "Wenn du {{labelA}} machst, erhöht sich die Wahrscheinlichkeit von {{labelB}} um {{diffPercent}}%.",
     "recommendationDecrease": "Wenn du {{labelA}} machst, sinkt die Wahrscheinlichkeit von {{labelB}} um {{diffPercent}}%."
+  },
+  "variableSelection": {
+    "wichDataWouldYouLikeToTrack": "Welche Daten möchtest du erfassen?",
+    "youCanChangeThisLater": "Du kannst dies später in den Einstellungen ändern.",
+    "soundsGoodContinue": "Klingt gut, weiter",
+    "selectionChoices" :"📊 = Auswahlmöglichkeit (z.B. Stimmung)",
+    "numberChoices" :"🔢 = Numerischer Wert (z.B. Schlafdauer in Stunden)",
+    "boolChoices":"🔀 = Ja/Nein (z.B. Sport gemacht)",
+    "textChoices":"📋 = Texteinträge (z.B. Aktivitäten)",
+    "edit": "Bearbeiten",
+    "done": "Fertig"
   }
 
 

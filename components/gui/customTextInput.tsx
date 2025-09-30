@@ -1,6 +1,7 @@
 import { View, Text, TextInput } from 'react-native';
 import React from 'react';
 import { isNumber } from '@/functions/numbers';
+import { useGlobalContext } from '../context/GlobalProvider';
 
 /**
  * CustomTextInput Component
@@ -44,6 +45,7 @@ const CustomTextInput = ({
 }) => {
   // State to track whether the input is focused
   const [isFocussed, setIsFocused] = React.useState(false);
+  const { colorTheme, setColorTheme, themeColors } = useGlobalContext();
 
   return (
     <TextInput
@@ -57,14 +59,14 @@ const CustomTextInput = ({
         backgroundColor: successColor
           ? '#12512aff'
           : compleated
-          ? 'rgba(8, 45, 109, 1)'
-          : '#1e1e1e',
+          ?   themeColors[colorTheme].button
+          :   themeColors[colorTheme].card,
         borderWidth: isFocussed ? 0 : 2,
         borderColor: successColor
           ? 'green'
           : isFocussed
           ? undefined
-          : '#133078ff',
+          : themeColors[colorTheme].button
         
       } as any}
       // Event handlers for focus and blur

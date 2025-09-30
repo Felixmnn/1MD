@@ -1,6 +1,7 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import React, { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useGlobalContext } from '../context/GlobalProvider';
 
 type EnumBarChartProps = {
   labelsArray: (string | number)[];
@@ -22,6 +23,7 @@ const EnumBarChart: React.FC<EnumBarChartProps> = ({
   setSelectedField
 }) => {
   const { t } = useTranslation();
+  const { colorTheme, themeColors } = useGlobalContext();
   const [selectedBarIndex, setSelectedBarIndex] = useState<number | null>(null);
 
   const enumMap: Record<number, string> = {
@@ -106,7 +108,7 @@ const EnumBarChart: React.FC<EnumBarChartProps> = ({
                 style={{
                   height: `${(item.value / maxY) * 90}%`, // ✅ Skaliert an maxY
                   minHeight: 2,
-                  backgroundColor: selectedBarIndex === index ? '#facc15' : '#1e90ff',
+                  backgroundColor: selectedBarIndex === index ? '#facc15' : themeColors[colorTheme].buttonInvert,
                 }}
                 onPress={() => {
                  

@@ -8,6 +8,7 @@ const PillButton = ({
     title = "Pill",
     color1 = "#252c43ff",
     color2 = '#2d354bff',
+    borderColor = '#12116bff',
     onPress = () => { },
     small = false,
     selected = true,
@@ -52,8 +53,6 @@ const PillButton = ({
                 
                 alignItems: 'center',
                 flexDirection: "row"
-                ,borderWidth: selected ? 1 : 0,
-                borderColor: selected ? '#092485ff' : '#12116bff',
             }}
         >   
         

@@ -1,6 +1,7 @@
 import { View, Text, TouchableOpacity, useWindowDimensions } from 'react-native';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useGlobalContext } from '../context/GlobalProvider';
 
 /**
  * Props for the CustomBarChart Component
@@ -22,6 +23,7 @@ const CustomBarChart: React.FC<CustomBarChartProps> = ({
   lastDate = new Date(),
 }) => {
   const { t } = useTranslation();
+  const { colorTheme, themeColors } = useGlobalContext();
   const [selectedBarIndex, setSelectedBarIndex] = useState<number | null>(null);
   const width = useWindowDimensions().width;
 
@@ -137,7 +139,7 @@ const CustomBarChart: React.FC<CustomBarChartProps> = ({
                 className="flex-1 relative justify-end mx-0.5"
                 style={{
 height: `${Math.max((value / highestValue) * 100, 2)}%`,
-                  backgroundColor: selectedBarIndex === idx ? '#facc15' : '#1e90ff',
+                  backgroundColor: selectedBarIndex === idx ? '#facc15' :  themeColors[colorTheme].buttonInvert,
                 }}
                 onPress={() => setSelectedBarIndex(idx)}
               >

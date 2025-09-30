@@ -20,6 +20,7 @@ import { router } from 'expo-router'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import { useIsFocused } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next'
+import { useGlobalContext } from '@/components/context/GlobalProvider'
 
 /**
  * This component is the heat of the app here the user can analyse their data.
@@ -33,6 +34,7 @@ import { useTranslation } from 'react-i18next'
 const { width } = Dimensions.get('window')
 const Analyse = () => {
   const { t } = useTranslation();
+  const { colorTheme, themeColors } = useGlobalContext();
   const [currentIndex, setCurrentIndex] = useState(0)
   const flatListRef = useRef(null)
   const isFocused = useIsFocused(); 
@@ -387,8 +389,12 @@ const lastDate = lastDateString
     const varAName =  getEntryByLabel(variables.varAName)?.name;
     const varBName = getEntryByLabel(variables.varBName)?.name;
   return (
-      <SafeAreaView edges={['top']} className='h-full w-full bg-gray-900 items-center '>
-        <Text className='text-white font-bold text-2xl mb-4'>{data[currentIndex].title}</Text>
+      <SafeAreaView edges={['top']} className='h-full w-full bg-gray-900 items-center '
+        style={{ backgroundColor: themeColors[colorTheme].background }}
+      >
+        <Text className='text-white font-bold text-2xl mb-4'
+          style={{ color: themeColors[colorTheme].inaktivText }}
+        >{data[currentIndex].title}</Text>
 
         {/* Charts */}
         <View style={{
@@ -417,7 +423,7 @@ const lastDate = lastDateString
                 marginHorizontal: ITEM_MARGIN / 2,
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor: "#0c1f44ff",
+                backgroundColor: themeColors[colorTheme].button,
                 height: currentIndex == index ? 240 : 220,
                 marginTop: currentIndex == index ? 0 : 10,
                 borderRadius: 10,
@@ -530,7 +536,7 @@ const lastDate = lastDateString
               height: 10,
               width: 10,
               borderRadius: 5,
-              backgroundColor: '#fff',
+              backgroundColor: themeColors[colorTheme].inaktivText,
               marginHorizontal: 5,
               marginBottom: 10,
               opacity: i === currentIndex ? 1 : 0.3,
@@ -554,8 +560,10 @@ const lastDate = lastDateString
             (
               <View>
   {/* Ausgewählter Fall */}
-  <View className="rounded-md p-4 mt-2" style={{ backgroundColor: '#0c1f44ff' }}>
-    <Text className="font-bold text-gray-200 text-lg mb-2">
+  <View className="rounded-md p-4 mt-2" style={{ backgroundColor: themeColors[colorTheme].button }}>
+    <Text className="font-bold text-gray-200 text-lg mb-2"
+      
+    >
       {t('boolBool.selectedTitle')}
     </Text>
     <Text className="text-gray-200">
@@ -572,7 +580,7 @@ const lastDate = lastDateString
   </View>
 
   {/* Hypothese */}
-  <View className="rounded-md p-4 mt-2" style={{ backgroundColor: '#0c1f44ff' }}>
+  <View className="rounded-md p-4 mt-2" style={{ backgroundColor: themeColors[colorTheme].button }}>
     <Text className="text-gray-200 font-bold text-lg mb-2">
       {t('boolBool.hypothesisTitle')}
     </Text>
@@ -609,14 +617,14 @@ const lastDate = lastDateString
                 title={ variables.varDataA.length > 9 ? getEntryByLabel(variables.varAName)?.name : t('buttons.variable1')}
                 onPress={() => {bottomSheetRef.current?.openSheet(0); setVariables({ ...variables, varToSelect: 1 })}} 
                 aditionalStyles='flex-1 mr-1 bg-gray-800'
-                backgroundColor='#0c1f44ff'
+                backgroundColor={themeColors[colorTheme].button}
                 isDisabled={variables.varDataA.length < 10}
               />
               <CustomButton
                 title={ variables.varDataB.length > 9 ? getEntryByLabel(variables.varBName)?.name :  t('buttons.variable2')}
                 onPress={() => {bottomSheetRef.current?.openSheet(0); setVariables({ ...variables, varToSelect: 2 })}} 
                 aditionalStyles='flex-1 ml-1'
-                backgroundColor='#0c1f44ff'
+                backgroundColor={themeColors[colorTheme].button}
                 isDisabled={variables.varDataB.length < 10}
 
 
@@ -683,7 +691,9 @@ const lastDate = lastDateString
       </ScrollView>
       {/* Bottom Sheet */}
       <CustomBottomSheet ref={bottomSheetRef} >
-        <View className="bg-gray-900 ">
+        <View className="bg-gray-900 "
+        style={{ backgroundColor: themeColors[colorTheme].bottomSheetBackground }}
+        >
           <View className="flex-row flex-wrap justify-between w-full">
             {Object.entries(
               dropdownOptions.reduce((acc: Record<string, typeof dropdownOptions>, option) => {
@@ -698,7 +708,9 @@ const lastDate = lastDateString
                 
               >
                 {/* Kategorie-Überschrift */}
-                <Text className="text-lg font-bold text-white mb-2 ">
+                <Text className="text-lg font-bold text-white mb-2 "
+                  style={{ color: themeColors[colorTheme].inaktivText }}
+                >
                   {
                     (kathegoryTranslation as Record<string, string>)[location] || location
                   }
@@ -721,7 +733,7 @@ const lastDate = lastDateString
                         style={{
                           backgroundColor: 
                           isSelected ? "#a81614ff" :
-                          "#0c1f44ff",
+                          themeColors[colorTheme].button,
                           
                         }}
                         onPress={async () => {

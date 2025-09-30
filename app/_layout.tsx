@@ -2,7 +2,6 @@ import { Stack } from "expo-router";
 import "../global.css"
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import "../assets/languages/i18n/index"; 
-import { useTranslation } from "react-i18next";
 import { StatusBar } from "react-native";
 import * as NavigationBar from 'expo-navigation-bar';
 import { useEffect } from "react";

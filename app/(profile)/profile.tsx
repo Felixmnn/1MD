@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, Platform, UIManager, LayoutAnimation, FlatList, ScrollView } from 'react-native';
 import Toast, { BaseToast, ToastConfigParams } from 'react-native-toast-message';
 import CustomButton from '@/components/gui/customButton';
@@ -192,7 +192,7 @@ const Profile = () => {
       {/* Terms and conditions (AGB)  */}
       <View className="bg-gray-800 p-4 rounded-xl mt-2"
         style={{
-          backgroundColor: themeColors[colorTheme].card,
+          backgroundColor: showAgb ? themeColors[colorTheme].button  : themeColors[colorTheme].card,
         }}
       >
         <TouchableOpacity

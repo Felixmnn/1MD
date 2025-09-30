@@ -1,9 +1,11 @@
+import { useGlobalContext } from '@/components/context/GlobalProvider';
 import { Tabs } from 'expo-router';
 import React from 'react';
 import { Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 export default function TabLayout() {
+  const { colorTheme, themeColors } = useGlobalContext();
   return (
     <Tabs
   screenOptions={({ route }) => ({
@@ -17,13 +19,13 @@ export default function TabLayout() {
         paddingBottom: 20, // optional, um Icons besser zu zentrieren
       },
       default: {
-        backgroundColor: '#0c1f44ff',
+        backgroundColor: themeColors[colorTheme].button,
         borderTopWidth: 0,
         height: 70, // Höhe der TabBar auf Android/anderen Plattformen
       },
     }),
     tabBarActiveTintColor: '#ffffff',
-    tabBarInactiveTintColor: '#888888',
+    tabBarInactiveTintColor: themeColors[colorTheme].inaktivText,
     tabBarIcon: ({ color, size }) => {
       let iconName;
       if (route.name === 'home') {

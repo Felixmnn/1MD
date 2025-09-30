@@ -1,5 +1,6 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
+import { useGlobalContext } from '../context/GlobalProvider';
 
 /**
  * CustomButton is a reusable component for rendering a styled button.
@@ -16,7 +17,7 @@ const CustomButton = ({
     title = 'Press Me',
     onPress,
     aditionalStyles = "",
-    backgroundColor = "#0c1f44ff",
+    backgroundColor
 }: {
     isDisabled?: boolean;
     title?: string;
@@ -24,13 +25,15 @@ const CustomButton = ({
     aditionalStyles?: string;
     backgroundColor?: string;
 }) => {
+    const { colorTheme, setColorTheme, themeColors } = useGlobalContext();
+  
   return (
     <TouchableOpacity
         className={`rounded-md w-64 p-2 ${aditionalStyles}`}
         disabled={isDisabled}
         style={{
-            borderColor: backgroundColor,
-            backgroundColor: backgroundColor,
+            borderColor: themeColors[colorTheme].button ,
+            backgroundColor: themeColors[colorTheme].button,
             borderWidth: 2,
             opacity: isDisabled ? 0.5 : 1,
         }}

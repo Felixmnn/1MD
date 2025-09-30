@@ -3,6 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { correlation, countOutliers, mean, median, minMax } from '@/functions/mathFunctions';
 import { returnHypothesisColor } from '@/functions/returnColors';
+import { useGlobalContext } from '../context/GlobalProvider';
 
 type BoolBoolProps = {
   variableA: boolean[];
@@ -24,6 +25,7 @@ const BoolBool: React.FC<BoolBoolProps> = ({
   selectedField = [null, null, 0, 0],
 }) => {
   const { t } = useTranslation();
+  const { colorTheme, themeColors } = useGlobalContext();
 
   // --- Validation ---
   if (variableA.length !== variableB.length) {
@@ -92,7 +94,7 @@ const [ hypoColor, hypothesisTextColor ] = returnHypothesisColor(phi);
   return (
     <View className="w-full h-full space-y-4">
       {/* Selected Field */}
-      <View className="rounded-md p-4 mt-2" style={{ backgroundColor: '#0c1f44ff' }}>
+      <View className="rounded-md p-4 mt-2" style={{ backgroundColor: themeColors[colorTheme].button }}>
         <Text className="font-bold text-gray-200 text-lg mb-2">{t('boolBool.selectedTitle')}</Text>
         <Text className="text-gray-200">
           {selectedField && selectedField[0] !== null && selectedField[1] !== null
@@ -108,7 +110,7 @@ const [ hypoColor, hypothesisTextColor ] = returnHypothesisColor(phi);
       </View>
 
       {/* Hypothese */}
-      <View className="rounded-md p-4 mt-2" style={{ backgroundColor: '#0c1f44ff' }}>
+      <View className="rounded-md p-4 mt-2" style={{ backgroundColor: themeColors[colorTheme].button }}>
         <Text className="text-gray-200 font-bold text-lg mb-2">{t('boolBool.hypothesisTitle')}</Text>
         <Text className="text-gray-200">{hypothesis}</Text>
       </View>
