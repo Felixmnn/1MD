@@ -55,6 +55,7 @@ const variables = () => {
         } fetchSelectedVariables();
     }, []);
 
+    
 
     const emojisAndMeaning = [ 
         t("variableSelection.selectionChoices"),
@@ -158,7 +159,7 @@ const variables = () => {
 
             {/* Bottom Gradient */}
             <LinearGradient
-                colors={["transparent","#111827"]}
+                colors={["transparent",themeColors[colorTheme].background]}
                 style={{
                     position: "absolute",
                     bottom: 0,

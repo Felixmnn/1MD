@@ -1,5 +1,5 @@
 import { View, Text, ScrollView, TouchableOpacity, Button } from 'react-native'
-import React, { use, useEffect } from 'react'
+import React, { use, useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import CustomButton from '@/components/gui/customButton'
@@ -17,6 +17,10 @@ import { useGlobalContext } from '@/components/context/GlobalProvider'
 import EnumVar from '@/components/home/enumVar'
 import CustomTextInput from '@/components/gui/customTextInput'
 import {MyTest} from '@/components/home/dragable'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import RenderInput from '@/components/home/renderInput'
+import { initializeDB, setSchlafErholungEntry } from '@/database/setEntryV2'
+import { getEntrys } from '@/database/getEntryV2'
 
 /**
  * The Home component is the landing page of the app.
@@ -240,7 +244,6 @@ type SelectedData = {
           overallDayRating: selectedData.overallDayRating,
 
       };
-      console.log("Things learned wird so gespeichert:", transformedData.thingsLearned)
       await addEntry(transformedData);
       setDataSaved(true);
       const amountOfEntrys = await getAmountOfEntries();
@@ -768,12 +771,73 @@ type SelectedData = {
 
 
 
+const [selectedVariables, setSelectedVariables ] = useState<string[]>([]); // Array of selected variable names
+const [ dataInputs, setDataInputs ] = useState<{ [key: string]: any }>({});
+const [ keys, setKeys ] = useState<string[]>([]); // Array of selected variable names
+useEffect(() => {
+        async function fetchSelectedVariables() {
+            const storedVariables = await AsyncStorage.getItem("selectedVariables");
+            if (storedVariables) {
+                
+                const pSelected = JSON.parse(storedVariables);
+                
+                let keys = [] as string[];
+                pSelected.map((i:{
+                    kategory: string
+                    name: string
+                    options?: string[]
+                    userKathegory?: string[]
+                    type: string
+                }) => keys.includes(i.kategory) ? null : keys.push(i.kategory))
+
+                const obj = Object.fromEntries(keys.map(key => [key, null]));
+                setDataInputs(obj);
+
+                setKeys(keys);
+                setSelectedVariables(JSON.parse(storedVariables));
+
+            } 
 
 
+        } fetchSelectedVariables();
+    }, []);
 
 
+   function kategoryIsCompleated(kategory: string) {
+  if (!selectedVariables) return false;
 
-    
+  const varsInKategory = selectedVariables
+    .filter(i => i.kategory === kategory)
+    .map(i => i.key);
+
+
+  for (let i = 0; i < varsInKategory.length; i++) {
+    if (
+      dataInputs[varsInKategory[i]] === null ||
+      dataInputs[varsInKategory[i]] === undefined || 
+      dataInputs[varsInKategory[i]] === ""
+    ) {
+
+      return false;
+    }
+  }
+
+  return true;
+}
+
+  function allKategoriesCompleated() {
+    if (!selectedVariables || keys.length === 0) return false; 
+    console.log("Keys:", keys);
+    for (let k = 0; k < keys.length; k++) {
+      console.log(kategoryIsCompleated(keys[k])? "Kategoriecheck erfolgreich" : "Kategoriecheck fehlgeschlagen", keys[k]);
+      if (!kategoryIsCompleated(keys[k])) {
+        console.log("Returned false for key:", keys[k]);
+        return false;
+      }
+    }
+    return true;
+  }
+
   return ( 
     <SafeAreaView edges={['top']} className='flex-1 px-2'
     style={{
@@ -781,6 +845,21 @@ type SelectedData = {
       }}
     >
       <ScrollView className='flex-1 '>
+        <CustomButton
+          title={"Clear AsyncStorage"}
+          onPress={async() => {
+            await AsyncStorage.clear();
+            console.log("AsyncStorage cleared");
+          }}
+          aditionalStyles='mb-2'
+          />
+       
+        <CustomButton 
+          onPress={()=> {
+            console.log(dataInputs);
+          }}
+          title="Log DataInputs"
+          />
         {/*
         {
           compleatOptions.map((option, index) => (
@@ -813,9 +892,9 @@ type SelectedData = {
         <View className='flex-row justify-between items-center mb-2'>
             <CustomButton
                 title={dataSaved ? selectedData.date + t('home.dateCompleated') : selectedData.date + t('home.saveData')}
-                onPress={async() => { await  makeEntry(selectedData)}}
-                isDisabled={isCompleated(selectedData) !== ""}
-                aditionalStyles={`flex-1 mr-2 ${isCompleated(selectedData) !== "" ? "opacity-50" : ""}`}
+                onPress={async() =>console.log("Datei gespeichert")}
+                isDisabled={!allKategoriesCompleated()}
+                aditionalStyles={`flex-1 mr-2 ${allKategoriesCompleated() ? "opacity-50" : ""}`}
             />
           <TouchableOpacity className=' p-2 rounded-full items-center justify-center' style={{backgroundColor:
             themeColors[colorTheme].button
@@ -827,18 +906,39 @@ type SelectedData = {
               />
           </TouchableOpacity>
         </View>
-         <DiplayAndEditDay
-            selectedData={selectedData}
-            setSelectedData={setSelectedData}
-            validEnumValues={validEnumValues}
-        />
+          {
+        keys && keys.map((kategory: string, index: number) => (
+
+          <View
+                  key={index}
+                  className={`px-2 mb-4 py-2 rounded-lg `}
+                  style={{
+                    backgroundColor: 
+                    kategoryIsCompleated(kategory)
+                      ? themeColors[colorTheme].button
+                      : themeColors[colorTheme].buttonBackground,
+                  }}
+                >
+            <Text key={index} className=' text-xl font-bold mb-2 mt-4'>{kategory}</Text>
+            {
+              selectedVariables && selectedVariables.filter(v => v.kategory === kategory).map((v:any) => ( 
+                <RenderInput
+                  item={v}
+                  dataInputs={dataInputs}
+                  setDataInputs={setDataInputs}
+                />           
+              ))
+            }
+          </View>
+        ))
+       }
         <View className=' mb-4 mt-2 '>
             <CustomButton
                 title={ isCompleated(selectedData) === "" ? dataSaved? t ('home.updateData') : t ('home.saveData') : `${t('home.missingData')} (${isCompleated(selectedData).length > 15 ? isCompleated(selectedData).slice(0, 15) + '...' : isCompleated(selectedData)})`}
-                onPress={async() => { await  makeEntry(selectedData); 
-                }}
-                isDisabled={isCompleated(selectedData) !== ""}
-                aditionalStyles={`mb-4 w-full px-2 ${isCompleated(selectedData) !== "" ? "opacity-50" : ""}`}
+                onPress={async() => console.log("Datei gespeichert")}
+                isDisabled={allKategoriesCompleated() ? false : true}
+                aditionalStyles={`mb-4 w-full px-2 ${ allKategoriesCompleated()
+                   ? "opacity-50" : ""}`}
             />
         </View>
       </ScrollView>
